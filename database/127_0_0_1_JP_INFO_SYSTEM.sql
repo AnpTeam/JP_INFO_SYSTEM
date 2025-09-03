@@ -100,11 +100,7 @@ CREATE TABLE `tbl_user` (
 -- Indexes for table `tbl_attraction`
 --
 ALTER TABLE `tbl_attraction`
-  ADD PRIMARY KEY (`atrr_id`),
-  ADD UNIQUE KEY `attr_name` (`attr_name`),
-  ADD UNIQUE KEY `attr_thumbnail` (`attr_thumbnail`),
-  ADD UNIQUE KEY `attr_desc` (`attr_desc`),
-  ADD UNIQUE KEY `attr_category` (`attr_category`);
+  ADD PRIMARY KEY (`atrr_id`);
 
 --
 -- Indexes for table `tbl_city`
@@ -133,8 +129,7 @@ ALTER TABLE `tbl_user`
   ADD PRIMARY KEY (`user_id`),
   ADD UNIQUE KEY `user_name` (`user_name`),
   ADD UNIQUE KEY `user_password` (`user_password`),
-  ADD UNIQUE KEY `user_email` (`user_email`),
-  ADD UNIQUE KEY `user_role` (`user_role`);
+  ADD UNIQUE KEY `user_email` (`user_email`);
 
 --
 -- AUTO_INCREMENT for dumped tables
