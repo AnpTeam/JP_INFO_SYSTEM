@@ -42,8 +42,10 @@
             <a href="/" class="list-group-item list-group-item-action active" aria-current="true">
               Home
             </a>
-          
+            <!-- SIDE VIEW -->
             <a href="/user" class="list-group-item list-group-item-action">  - User CRUD </a>
+            <a href="/attraction" class="list-group-item list-group-item-action">  - ATTRACTIONS CRUD </a>
+            <!-- SIDE VIEW END -->
           </div>
           <!-- .list-group END  -->
           @yield('sidebarMenu')
