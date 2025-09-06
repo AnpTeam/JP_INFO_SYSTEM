@@ -3,6 +3,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AttractionController;
+use App\Http\Controllers\RegionController;
 
 /* HOME PAGE */
 Route::get('/', [UserController::class, 'index']);
@@ -32,11 +33,11 @@ Route::put('/attraction/{id}', [AttractionController::class, 'update']);
 Route::delete('/attraction/remove/{id}',  [AttractionController::class, 'remove']);
 /* ATTRACTION ROUTE END */
 
-//product crud
-Route::get('/product', [ProductController::class, 'index']);
-Route::get('/product/adding',  [ProductController::class, 'adding']);
-Route::post('/product',  [ProductController::class, 'create']);
-Route::get('/product/{id}',  [ProductController::class, 'edit']);
-Route::put('/product/{id}',  [ProductController::class, 'update']);
-Route::delete('/product/remove/{id}',  [ProductController::class, 'remove']);
+//Region crud
+Route::get('/region', [RegionController::class, 'index']);
+Route::get('/region/adding',  [RegionController::class, 'adding']);
+Route::post('/region',  [RegionController::class, 'create']);
+Route::get('/region/{id}',  [RegionController::class, 'edit']);
+Route::put('/region/{id}',  [RegionController::class, 'update']);
+Route::delete('/region/remove/{id}',  [RegionController::class, 'remove']);
 

@@ -45,6 +45,7 @@
             <!-- SIDE VIEW -->
             <a href="/user" class="list-group-item list-group-item-action">  - User CRUD </a>
             <a href="/attraction" class="list-group-item list-group-item-action">  - ATTRACTIONS CRUD </a>
+            <a href="/region" class="list-group-item list-group-item-action">  - Region CRUD </a>
             <!-- SIDE VIEW END -->
           </div>
           <!-- .list-group END  -->
