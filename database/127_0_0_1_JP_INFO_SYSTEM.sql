@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 31, 2025 at 04:53 PM
+-- Generation Time: Sep 06, 2025 at 05:33 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `project`
+-- Database: `jp_info_system`
 --
 CREATE DATABASE IF NOT EXISTS `jp_info_system` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 USE `jp_info_system`;
@@ -30,7 +30,7 @@ USE `jp_info_system`;
 --
 
 CREATE TABLE `tbl_attraction` (
-  `atrr_id` int(11) NOT NULL,
+  `attr_id` int(11) NOT NULL,
   `attr_name` varchar(100) NOT NULL,
   `attr_thumbnail` varchar(200) NOT NULL,
   `attr_desc` varchar(300) NOT NULL,
@@ -68,12 +68,37 @@ CREATE TABLE `tbl_comment` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tbl_product`
+--
+
+CREATE TABLE `tbl_product` (
+  `id` int(11) NOT NULL,
+  `product_name` varchar(200) NOT NULL,
+  `product_detail` text NOT NULL,
+  `product_price` float(10,2) NOT NULL,
+  `product_img` varchar(200) NOT NULL,
+  `dateCreate` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tbl_product`
+--
+
+INSERT INTO `tbl_product` (`id`, `product_name`, `product_detail`, `product_price`, `product_img`, `dateCreate`) VALUES
+(7, '00000', '312312312342424242', 1111.00, 'uploads/product/Bl5XGza2gSM5l7FxcogDQLwJr1kw0GrwsNQMeqXK.png', '2025-09-04 07:21:38'),
+(8, '1234', '31232q3ew4422342424', 3123.00, 'uploads/product/q34yTffiIhmZQ9K5dSSxF7Y6MTvPYMx8GIrkvviL.png', '2025-09-04 07:23:30'),
+(9, '12313', '213123132131231', 123.00, 'uploads/product/F6lA0h7s1hwzqeaddYADS995uazTsBRePWRJj33B.png', '2025-09-04 07:38:40');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tbl_region`
 --
 
 CREATE TABLE `tbl_region` (
   `region_id` int(11) NOT NULL,
-  `region_name` varchar(100) NOT NULL
+  `region_name` varchar(100) NOT NULL,
+  `region_desc` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -100,7 +125,7 @@ CREATE TABLE `tbl_user` (
 -- Indexes for table `tbl_attraction`
 --
 ALTER TABLE `tbl_attraction`
-  ADD PRIMARY KEY (`atrr_id`);
+  ADD PRIMARY KEY (`attr_id`);
 
 --
 -- Indexes for table `tbl_city`
@@ -114,6 +139,12 @@ ALTER TABLE `tbl_city`
 --
 ALTER TABLE `tbl_comment`
   ADD PRIMARY KEY (`comment_id`);
+
+--
+-- Indexes for table `tbl_product`
+--
+ALTER TABLE `tbl_product`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `tbl_region`
@@ -139,7 +170,7 @@ ALTER TABLE `tbl_user`
 -- AUTO_INCREMENT for table `tbl_attraction`
 --
 ALTER TABLE `tbl_attraction`
-  MODIFY `atrr_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `attr_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `tbl_city`
@@ -152,6 +183,12 @@ ALTER TABLE `tbl_city`
 --
 ALTER TABLE `tbl_comment`
   MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tbl_product`
+--
+ALTER TABLE `tbl_product`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `tbl_region`
