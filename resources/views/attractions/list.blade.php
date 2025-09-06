@@ -11,7 +11,7 @@
 
 @section('content')
 <h3> ::Attractions Managements ::
-    <a href="/attraction/adding" class="btn btn-primary btn-sm"> Add Product </a>
+    <a href="/attraction/adding" class="btn btn-primary btn-sm"> Add Attraction </a>
 </h3>
 
 <table class="table table-bordered table-striped table-hover">
@@ -19,9 +19,10 @@
         <tr class="table-info">
             <th width="5%" class="text-center">No.</th>
             <th width="5%">Pic</th>
-            <th width="50%">Attractions Name & Detail </th>
+            <th width="45%">Attractions Name & Detail </th>
             <th width="15%" class="text-center">Category</th>
-            <th width="15%" class="text-center">Like Count</th>
+            <th width="15%" class="text-center">City</th>
+            <th width="10%" class="text-center">Like Count</th>
             <th width="5%" class="text-center">edit</th>
             <th width="5%" class="text-center">delete</th>
         </tr>
@@ -40,8 +41,18 @@
                 Detail:
                 {{ Str::limit($row->attr_desc, 120, '...') }}
             </td>
-            <td align="center">{{ $row->attr_category }}</td>
-            <td align="center">{{ $row->like_count }}</td>
+            <!-- FOREACH CATEGORY -->
+            
+            <td align="center">{{ $row->category_name }}</td>
+            
+            <!-- FOREACH CATEGORY END -->
+
+            <!-- FOREACH CITY -->
+            
+            <td align="center">{{ $row->city_name }}</td>
+            
+            <!-- FOREACH CITY END -->
+            <td align="center">{{ number_format($row->like_count,0) }}</td>
             <td align="center">
                 <a href="/attraction/{{ $row->attr_id }}" class="btn btn-warning btn-sm">edit</a>
             </td>

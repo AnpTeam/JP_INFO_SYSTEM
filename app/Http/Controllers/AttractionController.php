@@ -6,8 +6,11 @@ use Illuminate\Support\Facades\Validator; //form validation
 use RealRashid\SweetAlert\Facades\Alert; //sweet alert
 use Illuminate\Support\Facades\Storage; //สำหรับเก็บไฟล์ภาพ
 use Illuminate\Pagination\Paginator; //แบ่งหน้า
+use Illuminate\Support\Facades\DB; // JOIN
 use App\Models\AttractionModel; //model
-use App\Models\ProductModel; //model
+use App\Models\CityModel; //model
+use App\Models\CategoryModel; //model
+
 
 
 
@@ -16,12 +19,23 @@ class AttractionController extends Controller
 
     public function index(){
         Paginator::useBootstrap(); // ใช้ Bootstrap pagination
-        $attrs = AttractionModel::orderBy('attr_id', 'desc')->paginate(5); //order by & pagination
+        // $attrs = AttractionModel::orderBy('attr_id', 'desc')->paginate(5); //order by & pagination
+        // JOIN TABLE CATEGORY
+        $attrs = DB::table('tbl_attraction')
+            ->join('tbl_category', 'tbl_attraction.category_id', '=', 'tbl_category.category_id')
+            ->join('tbl_city', 'tbl_attraction.city_id', '=', 'tbl_city.city_id')
+            ->orderBy('attr_id', 'asc')
+            ->paginate(5);
+
         //  return response()->json(['error' => $e->getMessage()], 500); //สำหรับ debug
         return view('attractions.list', compact('attrs'));
     }
      public function adding() {
-        return view('attractions.create');
+        // City & Category List
+        $citys = CityModel::orderBy('city_id', 'desc')->get();
+        $categories = CategoryModel::orderBy('category_id', 'desc')->get();
+
+        return view('attractions.create',compact('citys','categories'));
     }
 
 
@@ -29,10 +43,12 @@ public function create(Request $request)
 {
     //msg
     $messages = [
-        'attr_name.required' => 'กรุณากรอกชื่อสินค้า',
+        'attr_name.required' => 'กรุณากรอกชื่อสถานที่',
         'attr_name.min' => 'ต้องมีอย่างน้อย :min ตัวอักษร',
-        'attr_desc.required' => 'กรุณากรอกรายละเอียดสินค้า',
+
+        'attr_desc.required' => 'กรุณากรอกรายละเอียดสถานที่',
         'attr_desc.min' => 'ต้องมีอย่างน้อย :min ตัวอักษร',
+
         'attr_thumbnail.mimes' => 'รองรับ jpeg, png, jpg เท่านั้น !!',
         'attr_thumbnail.max' => 'ขนาดไฟล์ไม่เกิน 5MB !!',
     ];
@@ -64,7 +80,7 @@ public function create(Request $request)
         AttractionModel::create([
             'attr_name' => strip_tags($request->attr_name),
             'attr_desc' => strip_tags($request->attr_desc),
-            'attr_category' =>strip_tags($request->attr_category),
+            'category_id' =>$request->category_id,
             'city_id' => $request->city_id,
             'attr_thumbnail' => $imagePath,
         ]);
@@ -85,14 +101,17 @@ public function edit($attr_id)
         try {
             $attracts = AttractionModel::findOrFail($attr_id); // ใช้ findOrFail เพื่อให้เจอหรือ 404
 
+            $citys = CityModel::orderBy('city_id', 'desc')->get();
+            $categories = CategoryModel::orderBy('category_id', 'desc')->get();
+
             //ประกาศตัวแปรเพื่อส่งไปที่ view
-            if (isset($attracts)) {
+            if (isset($attracts) &&  isset($citys) && isset($categories)){
                 $attr_id = $attracts->attr_id;
                 $attr_name = $attracts->attr_name;
                 $attr_desc = $attracts->attr_desc;
-                $attr_category = $attracts->attr_category;
+                $category_id = $attracts->category_id;
                 $attr_thumbnail = $attracts->attr_thumbnail;
-                return view('attractions.edit', compact('attr_id', 'attr_name', 'attr_category', 'attr_desc', 'attr_thumbnail'));
+                return view('attractions.edit', compact('attr_id', 'attr_name', 'category_id', 'attr_desc', 'attr_thumbnail','citys','categories'));
             }
         } catch (\Exception $e) {
             // return response()->json(['error' => $e->getMessage()], 500); //สำหรับ debug
@@ -102,6 +121,32 @@ public function edit($attr_id)
 
 public function update($attr_id, Request $request)
 {
+    //msg
+    $messages = [
+        'attr_name.required' => 'กรุณากรอกชื่อสถานที่',
+        'attr_name.min' => 'ต้องมีอย่างน้อย :min ตัวอักษร',
+
+        'attr_desc.required' => 'กรุณากรอกรายละเอียดสถานที่',
+        'attr_desc.min' => 'ต้องมีอย่างน้อย :min ตัวอักษร',
+        
+        'attr_thumbnail.mimes' => 'รองรับ jpeg, png, jpg เท่านั้น !!',
+        'attr_thumbnail.max' => 'ขนาดไฟล์ไม่เกิน 5MB !!',
+    ];
+
+    //rule ตั้งขึ้นว่าจะเช็คอะไรบ้าง
+    $validator = Validator::make($request->all(), [
+        'attr_name' => 'required|min:3',
+        'attr_desc' => 'required|min:10',
+        'attr_thumbnail' => 'nullable|image|mimes:jpeg,png,jpg|max:5120',
+    ], $messages);
+    
+
+    //ถ้าผิดกฏให้อยู่หน้าเดิม และแสดง msg ออกมา
+    if ($validator->fails()) {
+        return redirect('attraction/' . $attr_id)
+            ->withErrors($validator)
+            ->withInput();
+    }
 
     try {
         // ดึงข้อมูลสินค้าตามไอดี ถ้าไม่เจอจะ throw Exception
@@ -124,7 +169,7 @@ public function update($attr_id, Request $request)
         // อัปเดตรายละเอียดสินค้า โดยใช้ strip_tags ป้องกันการแทรกโค้ด HTML/JS
         $attracts->attr_desc = strip_tags($request->attr_desc);
         // อัปเดตราคาสินค้า
-        $attracts->attr_category = $request->attr_category;
+        $attracts->category_id = $request->category_id;
         // อัปเดตราคาสินค้า
         $attracts->city_id = $request->city_id;
 

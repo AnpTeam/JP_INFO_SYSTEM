@@ -48,13 +48,16 @@
         <label class="col-sm-2">Category </label>
         <div class="col-sm-6">
             @csrf
-            <select id="role" name="attr_category" class="form-select">
-                <option value="tourist">tourist</option>
-                <option value="temple">temple</option>
+            <select id="role" name="category_id" class="form-select">
+                <!-- Foreach Category -->
+                @foreach ($categories as $category)
+                <option value="{{ $category->category_id }}">{{ $category->category_name }}</option>
+                @endforeach
+                <!-- Foreach Category End -->
             </select>
             @if(isset($errors))
-            @if($errors->has('attr_category'))
-            <div class="text-danger"> {{ $errors->first('attr_category') }}</div>
+            @if($errors->has('category_id'))
+            <div class="text-danger"> {{ $errors->first('category_id') }}</div>
             @endif
             @endif
         </div>
@@ -62,12 +65,15 @@
 
     <!-- City Dropdown -->
     <div class="form-group row mb-2">
-        <label class="col-sm-2">Category </label>
+        <label class="col-sm-2">City </label>
         <div class="col-sm-6">
             @csrf
             <select id="role" name="city_id" class="form-select">
-                <option value=1>Nara</option>
-                <option value=2>temple</option>
+                <!-- Foreach City -->
+                @foreach ($citys as $city)
+                <option value="{{ $city->city_id }}">{{ $city->city_name }}</option>
+                @endforeach
+                <!-- Foreach City End -->
             </select>
             @if(isset($errors))
             @if($errors->has('city_id'))
