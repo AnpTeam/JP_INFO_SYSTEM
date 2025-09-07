@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 07, 2025 at 05:26 AM
+-- Generation Time: Sep 07, 2025 at 05:25 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -39,7 +39,6 @@ CREATE TABLE `tbl_attraction` (
   `city_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-
 -- --------------------------------------------------------
 
 --
@@ -50,14 +49,6 @@ CREATE TABLE `tbl_category` (
   `category_id` int(11) NOT NULL,
   `category_name` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `tbl_category`
---
-
-INSERT INTO `tbl_category` (`category_id`, `category_name`) VALUES
-(1, 'Restaurant'),
-(2, 'Tourist Attractions');
 
 -- --------------------------------------------------------
 
@@ -70,14 +61,6 @@ CREATE TABLE `tbl_city` (
   `city_name` varchar(100) NOT NULL,
   `region_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `tbl_city`
---
-
-INSERT INTO `tbl_city` (`city_id`, `city_name`, `region_id`) VALUES
-(1, 'Nara', 1),
-(2, 'Tokyo', 2);
 
 -- --------------------------------------------------------
 
@@ -176,19 +159,19 @@ ALTER TABLE `tbl_user`
 -- AUTO_INCREMENT for table `tbl_attraction`
 --
 ALTER TABLE `tbl_attraction`
-  MODIFY `attr_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `attr_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tbl_category`
 --
 ALTER TABLE `tbl_category`
-  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tbl_city`
 --
 ALTER TABLE `tbl_city`
-  MODIFY `city_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `city_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tbl_comment`
@@ -200,7 +183,7 @@ ALTER TABLE `tbl_comment`
 -- AUTO_INCREMENT for table `tbl_region`
 --
 ALTER TABLE `tbl_region`
-  MODIFY `region_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `region_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tbl_user`
