@@ -10,13 +10,13 @@
 @endsection
 
 @section('content')
-<h3> ::Attractions Managements ::
-    <a href="/attraction/adding" class="btn btn-primary btn-sm"> Add Attraction </a>
-</h3>
+<h2 class="fw-bold mb-3"> Attraction Managements Table
+    <a href="/attraction/adding" class="ms-3 btn btn-primary btn-sm"> + Attraction </a>
+</h2>
 
 <table class="table table-bordered table-striped table-hover">
     <thead>
-        <tr class="table-info">
+        <tr class="">
             <th width="5%" class="text-center">No.</th>
             <th width="5%">Pic</th>
             <th width="45%">Attractions Name & Detail </th>

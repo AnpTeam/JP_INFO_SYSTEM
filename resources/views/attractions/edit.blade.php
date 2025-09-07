@@ -5,11 +5,13 @@
 @section('sidebarMenu')
 @section('content')
 
-<h3> :: form Update Attraction :: </h3>
-
 <form action="/attraction/{{ $attr_id }}" method="post" enctype="multipart/form-data">
     @csrf
     @method('put')
+
+    <!-- Title -->
+    <h1 class=" fw-bold mb-4 text-dark">ATTRACTION EDIT FORM </h1>
+
     <!-- Form Name -->
     <div class="form-group row mb-2">
         <label class="col-sm-2"> Attraction Name </label>

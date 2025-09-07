@@ -7,18 +7,17 @@
 @endsection
 @section('content')
 
-
-<!-- Title -->
-<h3> :: Form Add Product :: </h3>
-
 <!-- Form START -->
 <form action="/attraction/" method="post" enctype="multipart/form-data">
     @csrf
 
+    <!-- Title -->
+    <h1 class=" fw-bold mb-4 text-dark">ATTRACTION ADD FORM </h1>
+
     <!-- Form Name -->
-    <div class="form-group row mb-2">
-        <label class="col-sm-2"> Attraction Name </label>
-        <div class="col-sm-7">
+    <div class="form-group row mb-4">
+        <label class="col-sm-12 mb-2"> Attraction Name </label>
+        <div class="col-sm-12">
             <input type="text" class="form-control" name="attr_name" required placeholder="Attration Name "
                 minlength="3" value="{{ old('attr_name') }}">
             @if(isset($errors))
@@ -30,9 +29,9 @@
     </div>
 
     <!-- Form Description -->
-    <div class="form-group row mb-2">
-        <label class="col-sm-2"> Attraction Description </label>
-        <div class="col-sm-7">
+    <div class="form-group row mb-4">
+        <label class="col-sm-12 mb-2"> Attraction Description </label>
+        <div class="col-sm-12">
             <textarea name="attr_desc" class="form-control" rows="4" required
                 placeholder="Attraction Description ">{{ old('attr_desc') }}</textarea>
             @if(isset($errors))
@@ -44,11 +43,13 @@
     </div>
 
     <!-- Category Dropdown -->
-    <div class="form-group row mb-2">
-        <label class="col-sm-2">Category </label>
-        <div class="col-sm-6">
+    <div class="form-group row mb-4">
+        <label class="col-sm-12 mb-2">Category </label>
+        <div class="col-sm-12">
             @csrf
             <select id="role" name="category_id" class="form-select">
+                <!-- Default Value -->
+                <option value="">-- Select Category --</option>
                 <!-- Foreach Category -->
                 @foreach ($categories as $category)
                 <option value="{{ $category->category_id }}">{{ $category->category_name }}</option>
@@ -64,11 +65,13 @@
     </div>
 
     <!-- City Dropdown -->
-    <div class="form-group row mb-2">
-        <label class="col-sm-2">City </label>
-        <div class="col-sm-6">
+    <div class="form-group row mb-4">
+        <label class="col-sm-12 mb-2">City </label>
+        <div class="col-sm-12">
             @csrf
             <select id="role" name="city_id" class="form-select">
+                <!-- Default Value -->
+                <option value="">-- Select City --</option>
                 <!-- Foreach City -->
                 @foreach ($citys as $city)
                 <option value="{{ $city->city_id }}">{{ $city->city_name }}</option>
@@ -83,9 +86,9 @@
         </div>
     </div>
 
-    <div class="form-group row mb-2">
-        <label class="col-sm-2"> Pic </label>
-        <div class="col-sm-6">
+    <div class="form-group row mb-4">
+        <label class="col-sm-2 mb-2">Attraction Picure </label>
+        <div class="col-sm-5">
             <input type="file" name="attr_thumbnail" required placeholder="attr_thumbnail" accept="image/*">
             @if(isset($errors))
             @if($errors->has('attr_thumbnail'))
@@ -95,18 +98,17 @@
         </div>
     </div>
 
+    <!-- Create & Cancel -->
     <div class="form-group row mb-2">
-        <label class="col-sm-2"> </label>
-        <div class="col-sm-5">
+        <label class="col-sm-12"> </label>
+        <div class="col-sm-12">
 
-            <button type="submit" class="btn btn-primary"> Insert Attraction </button>
+            <button type="submit" class="btn btn-primary me-3"> Insert Attraction </button>
             <a href="/product" class="btn btn-danger">cancel</a>
         </div>
     </div>
-
 </form>
 <!-- Form END -->
-</div>
 
 
 @endsection
