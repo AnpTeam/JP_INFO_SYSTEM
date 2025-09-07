@@ -25,7 +25,7 @@
                 @csrf
                 <!-- Name Form -->
                 <div class="form-group row mb-2">
-                    <label class="col-sm-2"> Name - Surname </label>
+                    <label class="col-sm-3"> Name - Surname </label>
                     <div class="col-sm-6">
                         <input type="text" class="form-control" name="user_name" required placeholder="Name"
                             minlength="3" value="{{ old('user_name') }}">
@@ -39,7 +39,7 @@
 
                 <!-- Email Form -->
                 <div class="form-group row mb-2">
-                    <label class="col-sm-2"> Email </label>
+                    <label class="col-sm-3"> Email </label>
                     <div class="col-sm-6">
                         <input type="email" class="form-control" name="user_email" required placeholder="Email"
                             minlength="3" value="{{ old('user_email') }}">
@@ -53,7 +53,7 @@
 
                 <!-- Password Form -->
                 <div class="form-group row mb-2">
-                    <label class="col-sm-2"> Password </label>
+                    <label class="col-sm-3"> Password </label>
                     <div class="col-sm-6">
                         <input type="password" class="form-control" name="user_password" required placeholder="Password"
                             minlength="3">
@@ -67,7 +67,7 @@
 
                 <!-- Phone Form -->
                 <div class="form-group row mb-2">
-                    <label class="col-sm-2"> Phone </label>
+                    <label class="col-sm-3"> Phone </label>
                     <div class="col-sm-6">
                         <input type="tel" class="form-control" name="user_phone" required placeholder="Phone 10 digit"
                             minlength="3" maxlength="10" value="{{ old('user_phone') }}">
@@ -81,7 +81,7 @@
 
                 <!-- Role Dropdown -->
                 <div class="form-group row mb-2">
-                    <label class="col-sm-2">Role </label>
+                    <label class="col-sm-3">Role </label>
                     <div class="col-sm-6">
                         @csrf
                         <select id="role" name="user_role" class="form-select">
@@ -98,7 +98,7 @@
 
                 <!-- Save & Cancel -->
                 <div class="form-group row mb-2">
-                    <label class="col-sm-2"> </label>
+                    <label class="col-sm-3"> </label>
                     <div class="col-sm-5">
 
                         <button type="submit" class="btn btn-primary"> Save </button>
