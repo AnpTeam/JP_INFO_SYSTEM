@@ -14,10 +14,10 @@
     <!-- Title -->
     <h1 class=" fw-bold mb-4 text-dark">ATTRACTION ADD FORM </h1>
 
-    <!-- Form Name -->
-    <div class="form-group row mb-4">
-        <label class="col-sm-12 mb-2"> Attraction Name </label>
-        <div class="col-sm-12">
+    <!-- Attraction Name -->
+    <div class="form-group row mb-2">
+        <label class="col-sm-2"> Attraction Name </label>
+        <div class="col-sm-7">
             <input type="text" class="form-control" name="attr_name" required placeholder="Attration Name "
                 minlength="3" value="{{ old('attr_name') }}">
             @if(isset($errors))
@@ -28,10 +28,10 @@
         </div>
     </div>
 
-    <!-- Form Description -->
-    <div class="form-group row mb-4">
-        <label class="col-sm-12 mb-2"> Attraction Description </label>
-        <div class="col-sm-12">
+    <!-- Attraction Description -->
+    <div class="form-group row mb-2">
+        <label class="col-sm-2"> Attraction Description </label>
+        <div class="col-sm-7">
             <textarea name="attr_desc" class="form-control" rows="4" required
                 placeholder="Attraction Description ">{{ old('attr_desc') }}</textarea>
             @if(isset($errors))
@@ -43,9 +43,9 @@
     </div>
 
     <!-- Category Dropdown -->
-    <div class="form-group row mb-4">
-        <label class="col-sm-12 mb-2">Category </label>
-        <div class="col-sm-12">
+    <div class="form-group row mb-2">
+        <label class="col-sm-2">Category </label>
+        <div class="col-sm-6">
             @csrf
             <select id="role" name="category_id" class="form-select">
                 <!-- Default Value -->
@@ -65,9 +65,9 @@
     </div>
 
     <!-- City Dropdown -->
-    <div class="form-group row mb-4">
-        <label class="col-sm-12 mb-2">City </label>
-        <div class="col-sm-12">
+    <div class="form-group row mb-2">
+        <label class="col-sm-2">City </label>
+        <div class="col-sm-6">
             @csrf
             <select id="role" name="city_id" class="form-select">
                 <!-- Default Value -->
@@ -86,9 +86,10 @@
         </div>
     </div>
 
-    <div class="form-group row mb-4">
-        <label class="col-sm-2 mb-2">Attraction Picure </label>
-        <div class="col-sm-5">
+    <!-- Attraction Picture -->
+    <div class="form-group row mb-2">
+        <label class="col-sm-2"> Pic </label>
+        <div class="col-sm-6">
             <input type="file" name="attr_thumbnail" required placeholder="attr_thumbnail" accept="image/*">
             @if(isset($errors))
             @if($errors->has('attr_thumbnail'))
@@ -100,11 +101,10 @@
 
     <!-- Create & Cancel -->
     <div class="form-group row mb-2">
-        <label class="col-sm-12"> </label>
-        <div class="col-sm-12">
-
-            <button type="submit" class="btn btn-primary me-3"> Insert Attraction </button>
-            <a href="/product" class="btn btn-danger">cancel</a>
+        <label class="col-sm-2"> </label>
+        <div class="col-sm-5">
+            <button type="submit" class="btn btn-primary"> Insert Attraction </button>
+            <a href="/attraction" class="btn btn-danger">Cancel</a>
         </div>
     </div>
 </form>

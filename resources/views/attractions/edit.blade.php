@@ -12,7 +12,7 @@
     <!-- Title -->
     <h1 class=" fw-bold mb-4 text-dark">ATTRACTION EDIT FORM </h1>
 
-    <!-- Form Name -->
+    <!-- Attraction Name -->
     <div class="form-group row mb-2">
         <label class="col-sm-2"> Attraction Name </label>
         <div class="col-sm-7">
@@ -26,7 +26,7 @@
         </div>
     </div>
 
-    <!-- Form Description -->
+    <!-- Attraction Description -->
     <div class="form-group row mb-2">
         <label class="col-sm-2"> Attraction Description </label>
         <div class="col-sm-7">
@@ -60,7 +60,7 @@
         </div>
     </div>
 
-      <!-- City Dropdown -->
+    <!-- City Dropdown -->
     <div class="form-group row mb-2">
         <label class="col-sm-2">City </label>
         <div class="col-sm-6">
@@ -80,8 +80,7 @@
         </div>
     </div>
 
-
-    <!-- Form Picture -->
+    <!-- Attraction Picture -->
     <div class="form-group row mb-2">
         <label class="col-sm-2"> Pic </label>
         <div class="col-sm-6">
@@ -97,17 +96,16 @@
         </div>
     </div>
 
+    <!-- Update & Cancel -->
     <div class="form-group row mb-2">
         <label class="col-sm-2"> </label>
         <div class="col-sm-5">
             <input type="hidden" name="oldImg" value="{{ $attr_thumbnail }}">
             <button type="submit" class="btn btn-primary"> Update </button>
-            <a href="/attraction" class="btn btn-danger">cancel</a>
+            <a href="/attraction" class="btn btn-danger">Cancel</a>
         </div>
     </div>
-
 </form>
-</div>
 
 
 @endsection
