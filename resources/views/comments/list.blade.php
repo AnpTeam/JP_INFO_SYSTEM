@@ -10,78 +10,54 @@
 @endsection
 
 @section('content')
+
 <div class="container mt-4">
     <div class="row">
         <div class="col-md-12">
-            <!-- Title & Add Button -->
-            <h2 class="fw-bold mb-3"> Attraction Managements Table
-                <a href="/attraction/adding" class="ms-3 btn btn-primary btn-sm"> + Attraction </a>
+            <h2 class="fw-bold mb-3"> Comments Managements Table
+                <a href="/comment/adding" class="ms-3 btn btn-primary btn-sm"> + Comment </a>
             </h2>
 
-            <!-- Table for Fetch Data -->
-            <table class="table table-bordered table-striped table-hover">
-                <!-- Table Title -->
+            <table class="table table-bordered table-striped table-hover ">
                 <thead>
                     <tr class="">
                         <th width="5%" class="text-center">No.</th>
-                        <th width="5%">Pic</th>
-                        <th width="45%">Attractions Name & Detail </th>
-                        <th width="15%" class="text-center">Category</th>
-                        <th width="15%" class="text-center">City</th>
+                        <th width="15%" class="text-center">Attraction</th>
+                        <th width="15%" class="text-center">Username</th>
+                        <th width="40%">Comment Detail </th>
                         <th width="15%" class="text-center">Like Count</th>
                         <th width="5%" class="text-center">edit</th>
                         <th width="5%" class="text-center">delete</th>
                     </tr>
                 </thead>
 
-                <!-- Table Data -->
                 <tbody>
-                    @foreach($attrs as $row)
+                    @foreach($comments as $row)
                     <tr>
-                        <!-- No. -->
                         <td align="center">{{ $loop->iteration }}</td>
-
-                        <!-- Attraction Picture -->
-                        <td>
-                            <img src="{{ asset('storage/' . $row->attr_thumbnail) }}" width="100">
+                        <td align="leftr">{{ $row->attr_name }}</td>
+                        <td align="left">{{ $row->user_name }}</td>
+                        <td align="left">
+                            {{ Str::limit($row->comment_desc, 120, '...') }}
                         </td>
-                        <!-- Attraction Name & Description -->
-                        <td>
-                            <b>Name: {{ $row->attr_name }}</b> <br>
-                            Detail:
-                            {{ Str::limit($row->attr_desc, 120, '...') }}
-                        </td>
-
-                        <!-- Category Name -->
-                        <td align="center">{{ $row->category_name }}</td>
-
-                        <!-- City Name -->
-                        <td align="center">{{ $row->city_name }}</td>
-
-                        <!-- Like Count -->
-                        <td align="center">{{ number_format($row->like_count,0) }}</td>
-
-                        <!-- Edit Button -->
+                        <td align="right">{{ number_format($row->like_count,0) }}</td>
                         <td align="center">
-                            <a href="/attraction/{{ $row->attr_id }}" class="btn btn-warning btn-sm">edit</a>
+                            <a href="/comment/{{ $row->comment_id }}" class="btn btn-warning btn-sm">edit</a>
                         </td>
-
-                        <!-- Delete Button -->
                         <td align="center">
-                            {{-- <form action="/attraction/remove/{{$row->attr_id}}" method="post">
+
+                            {{-- <form action="/comments/remove/{{$row->comment_id}}" method="post">
                             @csrf
                             @method('delete')
-                            <!-- Submit Button -->
                             <button type="submit" class="btn btn-danger btn-sm"
                                 onclick="return confirm('Sure to Delete !!');">delete</button>
                             </form> --}}
 
-                            <!-- Delete Confirm Button -->
-                            <button type="button" class="btn btn-danger btn-sm"
-                                onclick="deleteConfirm({{ $row->attr_id }})">delete</button>
 
-                            <!-- Delete Form -->
-                            <form id="delete-form-{{ $row->attr_id }}" action="/attraction/remove/{{$row->attr_id}}"
+                            <button type="button" class="btn btn-danger btn-sm"
+                                onclick="deleteConfirm({{ $row->comment_id }})">delete</button>
+
+                            <form id="delete-form-{{ $row->comment_id }}" action="/comment/remove/{{$row->comment_id}}"
                                 method="POST" style="display: none;">
                                 @csrf
                                 @method('delete')
@@ -94,12 +70,9 @@
         </div>
     </div>
     
-    <!-- Links -->
     <div>
-        {{ $attrs->links() }}
+        {{ $comments->links() }}
     </div>
-
-
     @endsection
 
     @section('footer')

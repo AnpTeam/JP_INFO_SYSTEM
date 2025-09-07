@@ -10,60 +10,68 @@
 @endsection
 
 @section('content')
-<h3> ::Region Managements ::
-    <a href="/region/adding" class="btn btn-primary btn-sm"> Add Region </a>
-</h3>
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-12">
+            <!-- Title -->
+            <h2 class="fw-bold mb-3"> Region Managements Table
+                <a href="/region/adding" class="ms-3 btn btn-primary btn-sm"> + Region </a>
+            </h2>
 
-<table class="table table-bordered table-striped table-hover">
-    <thead>
-        <tr class="table-info">
-            <th width="5%" class="text-center">No.</th>
-            <th width="5%">Pic</th>
-            <th width="55%">Region Name & Detail </th>
-            <th width="10%" class="text-center">edit</th>
-            <th width="10%" class="text-center">delete</th>
-        </tr>
-    </thead>
+            <!-- Table -->
+            <table class="table table-bordered table-striped table-hover">
+                <thead>
+                    <tr class="">
+                        <th width="5%" class="text-center">No.</th>
+                        <th width="5%">Pic</th>
+                        <th width="55%">Region Name & Detail </th>
+                        <th width="10%" class="text-center">edit</th>
+                        <th width="10%" class="text-center">delete</th>
+                    </tr>
+                </thead>
 
-    <tbody>
-        @foreach($region as $row)
-        <tr>
-            <td align="center">{{ $row->region_id }}</td>
-            <td>
+                <tbody>
+                    @foreach($region as $row)
+                    <tr>
+                        <td align="center">{{ $row->region_id }}</td>
+                        <td>
 
-                <img src="{{ asset('storage/' . $row->region_thumbnail) }}" width="100">
-            </td>
-            <td>
-                <b>Name: {{ $row->region_name }}</b> <br>
-                Detail:
-                {{ Str::limit($row->region_desc, 120, '...') }}
-            </td>
-            <td align="center">
-                <a href="/region/{{ $row->region_id }}" class="btn btn-warning btn-sm">edit</a>
-            </td>
-            <td align="center">
+                            <img src="{{ asset('storage/' . $row->region_thumbnail) }}" width="100">
+                        </td>
+                        <td>
+                            <b>Name: {{ $row->region_name }}</b> <br>
+                            Detail:
+                            {{ Str::limit($row->region_desc, 120, '...') }}
+                        </td>
+                        <td align="center">
+                            <a href="/region/{{ $row->region_id }}" class="btn btn-warning btn-sm">edit</a>
+                        </td>
+                        <td align="center">
 
-                {{-- <form action="/attraction/remove/{{$row->attr_id}}" method="post">
-                @csrf
-                @method('delete')
-                <button type="submit" class="btn btn-danger btn-sm"
-                    onclick="return confirm('Sure to Delete !!');">delete</button>
-                </form> --}}
+                            {{-- <form action="/attraction/remove/{{$row->attr_id}}" method="post">
+                            @csrf
+                            @method('delete')
+                            <button type="submit" class="btn btn-danger btn-sm"
+                                onclick="return confirm('Sure to Delete !!');">delete</button>
+                            </form> --}}
 
 
-                <button type="button" class="btn btn-danger btn-sm"
-                    onclick="deleteConfirm({{ $row->region_id }})">delete</button>
+                            <button type="button" class="btn btn-danger btn-sm"
+                                onclick="deleteConfirm({{ $row->region_id }})">delete</button>
 
-                <form id="delete-form-{{ $row->region_id }}" action="/region/remove/{{$row->region_id}}" method="POST"
-                    style="display: none;">
-                    @csrf
-                    @method('delete')
-                </form>
-            </td>
-        </tr>
-        @endforeach
-    </tbody>
-</table>
+                            <form id="delete-form-{{ $row->region_id }}" action="/region/remove/{{$row->region_id}}"
+                                method="POST" style="display: none;">
+                                @csrf
+                                @method('delete')
+                            </form>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 
 <div>
     {{ $region->links() }}

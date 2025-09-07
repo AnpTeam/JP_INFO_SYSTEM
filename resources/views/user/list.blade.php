@@ -14,13 +14,15 @@
 <div class="container mt-4">
     <div class="row">
         <div class="col-md-12">
-            <h1>User data
-                <a href="/user/adding" class="btn btn-primary btn-sm mb-2"> + User </a>
-            </h1>
+            <!-- Title -->
+            <h2 class="fw-bold mb-3"> User Managements Table
+                <a href="/user/adding" class="ms-3 btn btn-primary btn-sm"> + User </a>
+            </h2>
 
+            <!-- Table -->
             <table class="table table-bordered table-striped table-hover">
                 <thead>
-                    <tr class="table-info">
+                    <tr class="">
                         <th width="5%" class="text-center">No.</th>
                         <th width="15%"> Name</th>
                         <th width="20%">Email/Username</th>
