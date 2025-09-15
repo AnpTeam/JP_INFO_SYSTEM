@@ -91,36 +91,29 @@ class CommentController extends Controller
 
 public function create(Request $request)
 {
-    //msg
-    /*
+    /* Validate Message */
     $messages = [
-        'std_code.required' => 'กรุณากรอกข้อมูล',
-        'std_code.min' => 'ต้องมีอย่างน้อย :min ตัวอักษร',
-        'std_code.unique' => 'ข้อมูลซ้ำ',
-        'std_name.required' => 'กรุณากรอกข้อมูล',
-        'std_name.min' => 'ต้องมีอย่างน้อย :min ตัวอักษร',
-        'std_phone.required' => 'กรุณากรอกข้อมูล',
-        'std_phone.min' => 'ต้องมีอย่างน้อย :min ตัวอักษร',
-        'std_phone.max' => 'ห้ามเกิน :max ตัวอักษร',
-        'std_img.mimes' => 'รองรับ jpeg, png, jpg เท่านั้น !!',
-        'std_img.max' => 'ขนาดไฟล์ไม่เกิน 5MB !!',
+        'user_id.required' => 'กรุณากรอกข้อมูล',
+
+        'comment_desc.required' => 'กรุณากรอกข้อมูล',
+        'comment_desc.min' => 'ต้องมีอย่างน้อย :min ตัวอักษร',
+
+        'attr_id.required' => 'กรุณากรอกข้อมูล',
     ];
 
     //rule ตั้งขึ้นว่าจะเช็คอะไรบ้าง
     $validator = Validator::make($request->all(), [
-        'std_code' => 'required|min:3|unique:tbl_student',
-        'std_name' => 'required|min:5',
-        'std_phone' => 'required|min:10|max:10',
-        'std_img' => 'nullable|image|mimes:jpeg,png,jpg|max:5120',
+        'user_id' => 'required|min:3|',
+        'comment_desc' => 'required|min:5',
+        'attr_id' => 'required',
     ], $messages);
     
-*/
-    // //ถ้าผิดกฏให้อยู่หน้าเดิม และแสดง msg ออกมา
-    // if ($validator->fails()) {
-    //     return redirect('comment/adding')
-    //         ->withErrors($validator)
-    //         ->withInput();
-    // }
+    //ถ้าผิดกฏให้อยู่หน้าเดิม และแสดง msg ออกมา
+    if ($validator->fails()) {
+        return redirect('comment/adding')
+            ->withErrors($validator)
+            ->withInput();
+    }
 
 
     //ถ้ามีการอัพโหลดไฟล์เข้ามา ให้อัพโหลดไปเก็บยังโฟลเดอร์ uploads/product

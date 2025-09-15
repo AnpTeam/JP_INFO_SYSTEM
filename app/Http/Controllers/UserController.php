@@ -51,8 +51,8 @@ class UserController extends Controller
             /** User Name
              *  @params required, min, unique
              */
-            'user_name.required' => 'กรุณากรอกข้อมูล',
-            'user_name.min' => 'กรุณากรอกขั้นต่ำ :min ข้อมูล',
+            'user_name.required' => 'กรุณากรอกข้อมูลผู้ใช้',
+            'user_name.min' => 'กรุณากรอกขั้นต่ำ :min ตัวอักศร',
             'user_name.unique' => 'ชื่อผู้ใช้ซ้ำ เพิ่มใหม่อีกครั้ง',
 
             /** User Email
