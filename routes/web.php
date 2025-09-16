@@ -5,6 +5,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AttractionController;
 use App\Http\Controllers\RegionController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\CityController;
+use App\Http\Controllers\CategoryController;
 
 /* HOME PAGE */
 Route::get('/', [UserController::class, 'index']);
@@ -53,3 +55,23 @@ Route::post('/comment',  [CommentController::class, 'create']);
 Route::get('/comment/{id}',  [CommentController::class, 'edit']);
 Route::put('/comment/{id}',  [CommentController::class, 'update']);
 Route::delete('/comment/remove/{id}',  [CommentController::class, 'remove']);
+
+/** CITY ROUTE
+ *  @USAGE : BASIC CRUD (CREATE, READ, UPDATE, DELETE)
+ */
+Route::get('/city', [CityController::class, 'index']);
+Route::get('/city/adding',  [CityController::class, 'adding']);
+Route::post('/city',  [CityController::class, 'create']);
+Route::get('/city/{id}',  [CityController::class, 'edit']);
+Route::put('/city/{id}',  [CityController::class, 'update']);
+Route::delete('/city/remove/{id}',  [CityController::class, 'remove']);
+
+/** CATEGORY ROUTE
+ *  @USAGE : BASIC CRUD (CREATE, READ, UPDATE, DELETE)
+ */
+Route::get('/category', [CategoryController::class, 'index']);
+Route::get('/category/adding',  [CategoryController::class, 'adding']);
+Route::post('/category',  [CategoryController::class, 'create']);
+Route::get('/category/{id}',  [CategoryController::class, 'edit']);
+Route::put('/category/{id}',  [CategoryController::class, 'update']);
+Route::delete('/category/remove/{id}',  [CategoryController::class, 'remove']);

@@ -48,8 +48,10 @@
             <a href="/attraction" class="list-group-item list-group-item-action">  - ATTRACTIONS CRUD </a>
             <a href="/region" class="list-group-item list-group-item-action">  - REGION CRUD </a>
             <a href="/comment" class="list-group-item list-group-item-action">  - COMMENT CRUD </a>
+            <a href="/city" class="list-group-item list-group-item-action">  - CITY CRUD </a>
+            <a href="/category" class="list-group-item list-group-item-action">  - CATEGORY CRUD </a>
             <!-- SIDE VIEW END -->
-          </div>
+          </div>  
           <!-- .list-group END  -->
           @yield('sidebarMenu')
         </div>
