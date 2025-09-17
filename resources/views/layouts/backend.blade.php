@@ -60,12 +60,17 @@
         <!-- .col-md-9 START  -->
         <div class="col-md-9">
           @yield('content')
+
+          
         </div>
         <!-- .col-md-9 END  -->
+         
       </div>
       <!-- .row END  -->
     </div>
     <!-- .container END  -->
+
+
 
     <!-- Footer START  -->
     <footer class="mt-5 mb-2">

@@ -7,9 +7,12 @@ use App\Http\Controllers\RegionController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\CityController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\HomeController;
+
 
 /* HOME PAGE */
-Route::get('/', [UserController::class, 'index']);
+Route::get('/', [HomeController::class, 'index']);
+Route::get('/search', [HomeController::class, 'searchAttraction']);
 /* HOME PAGE END */
 
 /** USER ROUTE
@@ -24,6 +27,8 @@ Route::delete('/user/remove/{id}',  [UserController::class, 'remove']);
 Route::get('/user/reset/{id}',  [UserController::class, 'reset']);
 Route::put('/user/reset/{id}',  [UserController::class, 'resetPassword']);
 /* USER ROUTE END */
+
+
 
 /** ATTRACTION ROUTE
  *  @USAGE : BASIC CRUD (CREATE, READ, UPDATE, DELETE)
@@ -75,3 +80,4 @@ Route::post('/category',  [CategoryController::class, 'create']);
 Route::get('/category/{id}',  [CategoryController::class, 'edit']);
 Route::put('/category/{id}',  [CategoryController::class, 'update']);
 Route::delete('/category/remove/{id}',  [CategoryController::class, 'remove']);
+

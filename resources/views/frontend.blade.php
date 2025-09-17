@@ -7,7 +7,7 @@
 @endsection
  
  
-@section('showProduct')    
+@section('showAttractions')    
 @endsection
 
  
