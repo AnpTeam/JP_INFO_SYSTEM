@@ -16,126 +16,127 @@
 
     <!-- Custom CSS -->
     <style>
-    .logo-img {
-        height: 60px;
-        width: auto;
-        max-height: 60px;
-    }
+        .logo-img {
+            height: 60px;
+            width: auto;
+            max-height: 60px;
+        }
 
-    .navbar-brand {
-        font-family: 'Roboto', sans-serif;
-        font-weight: 800;
-        /* or 500 for slightly bolder */
-    }
+        .navbar-brand {
+            font-family: 'Roboto', sans-serif;
+            font-weight: 800;
+            /* or 500 for slightly bolder */
+        }
 
-    .nav-link {
-        font-family: 'Roboto', sans-serif;
-    }
+        .nav-link {
+            font-family: 'Roboto', sans-serif;
+        }
 
-    .hero {
-        height: 100vh;
-        background-size: cover;
-        background-position: center;
-        position: relative;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        color: white;
-    }
+        .hero {
+            height: 100vh;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+        }
 
-    .hero-overlay {
-        background: rgba(0, 0, 0, 0.5);
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-    }
+        .hero-overlay {
+            background: rgba(0, 0, 0, 0.5);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
 
-    .hero-content {
-        z-index: 2;
-        text-align: center;
-        width: 100%;
-    }
+        .hero-content {
+            z-index: 2;
+            text-align: center;
+            width: 100%;
+        }
 
-    #topAttraction {}
+        #topAttraction {}
 
-    .card-overlay-center {
-        top: -50%;
-        /* adjust this to control how much it overlaps */
-        left: 50%;
-        transform: translateX(-50%);
-        width: auto;
-        height: 300px;
-        border-radius: 12px;
-        overflow: hidden;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
-        z-index: 10;
-        width: auto;
-        overflow: hidden;
-        border-radius: 12px;
-        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
-    }
+        .card-overlay-center {
+            top: -50%;
+            /* adjust this to control how much it overlaps */
+            left: 50%;
+            transform: translateX(-50%);
+            width: auto;
+            height: 300px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+            z-index: 10;
+            width: auto;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+        }
 
-    .card-overlay-center .card-img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        display: block;
-    }
+        .card-overlay-center .card-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
 
-    .location-icon {
-  font-size: 24px;  /* Increased size */
-  margin-bottom: 8px;
-  color: #ffffffff;
-}
+        .location-icon {
+            font-size: 24px;
+            /* Increased size */
+            margin-bottom: 8px;
+            color: #ffffffff;
+        }
 
-    .caption-center {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        color: white;
-        text-align: center;
-        background: rgba(0, 0, 0, 0.0);
-        padding: 10px 20px;
-        border-radius: 8px;
-    }
+        .caption-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.0);
+            padding: 10px 20px;
+            border-radius: 8px;
+        }
 
-    .card-title {
-        font-size: 24px;
-        font-weight: 600;
-        margin: 0;
-    }
+        .card-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin: 0;
+        }
 
-    .card-text {
-        font-size: 16px;
-        margin: 4px 0 0;
-    }
+        .card-text {
+            font-size: 16px;
+            margin: 4px 0 0;
+        }
 
-    .search-bar {
-        background: #fff;
-        padding: 10px;
-        border-radius: 50px;
-        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    }
+        .search-bar {
+            background: #fff;
+            padding: 10px;
+            border-radius: 50px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
 
-    .search-bar input,
-    .search-bar select {
-        border: none;
-        outline: none;
-        box-shadow: none;
-    }
+        .search-bar input,
+        .search-bar select {
+            border: none;
+            outline: none;
+            box-shadow: none;
+        }
 
-    .search-bar button {
-        border-radius: 50px;
-    }
+        .search-bar button {
+            border-radius: 50px;
+        }
     </style>
     @yield('css_before')
 </head>
 
 <body>
-  
+
 
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm fixed-top">
@@ -153,6 +154,21 @@
                     <li class="nav-item"><a class="nav-link" href="#">About</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Blog</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+                    <li class="nav-item">
+                        @if (Auth::check())
+                        <a href="#" class="nav-link"
+                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            Log out
+                        </a>
+
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display:none;">
+                            @csrf
+                        </form>
+                        @else
+                        <a href="{{ route('login') }}" class="nav-link">Log in</a>
+                        @endif
+                        
+                    </li>
                 </ul>
             </div>
         </div>
@@ -161,7 +177,7 @@
 
     @yield('imgSlide')
     @yield('showAttractions')
-    
+
 
 
 
@@ -173,7 +189,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous">
-    </script>
+        </script>
 
 
     @yield('js_before')

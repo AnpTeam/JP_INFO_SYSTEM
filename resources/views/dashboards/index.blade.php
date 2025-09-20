@@ -108,8 +108,6 @@
                             @foreach($filteredColumns as $col)
                                 <option value="{{ $col }}">{{ $col }}</option>
                             @endforeach
-                            <!-- Special option for view counter -->
-                            <option value="viewCounter"> view count </option>
                         </select>
                     </div>
                     <div class="col-md-6">
@@ -134,7 +132,7 @@
 
     <!-- JavaScript for Chart Rendering -->
     <script>
-        let visitsChart; 
+        let visitsChart;
         // declare visitsChart globally so it can be reused
 
         // Function to create a chart with given type, labels, and data
@@ -173,38 +171,30 @@
             {!! json_encode($dataViewCounter) !!} // data from DB
         );
 
-        // Event: when user selects a column
         $('#select_column').on('change', function () {
             let selectedColumn = $(this).val();
 
-            if (selectedColumn === 'viewCounter') {
-                // use Blade data directly
-                visitsChart.data.labels = {!! json_encode($label) !!};
-                visitsChart.data.datasets[0].data = {!! json_encode($dataViewCounter) !!};
-                visitsChart.update();
-            } else {
-                // fetch new data using AJAX
-                $.ajax({
-                    url: '/dashboard/chart-data',
-                    type: 'GET',
-                    data: { column: selectedColumn },
-                    dataType: 'json',
-                    cache: false, // prevent caching
-                    success: function (response) {
-                        if (response.labels && response.data) {
-                            visitsChart.data.labels = response.labels;
-                            visitsChart.data.datasets[0].data = response.data;
-                            visitsChart.update();
-                        } else {
-                            alert('Invalid response format');
-                        }
-                    },
-                    error: function (xhr, status, error) {
-                        console.error("AJAX Error:", error);
-                        alert('Error fetching chart data');
+            // Always fetch data dynamically via AJAX
+            $.ajax({
+                url: '/dashboard/chart-data',
+                type: 'GET',
+                data: { column: selectedColumn },
+                dataType: 'json',
+                cache: false,
+                success: function (response) {
+                    if (response.labels && response.data) {
+                        visitsChart.data.labels = response.labels;
+                        visitsChart.data.datasets[0].data = response.data;
+                        visitsChart.update();
+                    } else {
+                        alert('Invalid response format');
                     }
-                });
-            }
+                },
+                error: function (xhr, status, error) {
+                    console.error("AJAX Error:", error);
+                    alert('Error fetching chart data');
+                }
+            });
         });
 
         // Event: when user changes chart type
@@ -219,7 +209,6 @@
             visitsChart.destroy();
             visitsChart = createChart(selectedBarType, currentData.labels, currentData.datasets[0].data);
         });
-
     </script>
     <!-- End JavaScript -->
 
