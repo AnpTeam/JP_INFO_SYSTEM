@@ -34,18 +34,16 @@ class CityController extends Controller
     public function index()
     {
         Paginator::useBootstrap(); // ใช้ Bootstrap pagination
-        $city = CityModel::orderBy('city_id')->paginate(5); //order by & pagination
-        //  return response()->json(['error' => $e->getMessage()], 500); //สำหรับ debug
-        $city = DB::table('tbl_city')
-            ->join('tbl_region', 'tbl_city.region_id', '=', 'tbl_region.region_id')
-            ->orderBy('city_id')
-            ->paginate(5);
-        return view('citys.list', compact('city'));
+        $cities = DB::table('tbl_city')
+                ->join('tbl_region', 'tbl_city.region_id', '=', 'tbl_region.region_id')
+                ->orderBy('city_id')
+                ->paginate(5);
+        return view('cities.list',compact('cities'));
     }
-    public function adding()
-    {
-        $region = RegionModel::orderBy('region_name')->get();
-        return view('citys.create', compact('region'));
+     public function adding() {
+        $cities = CityModel::orderBy('city_name')->get();
+        $regions = RegionModel::orderBy('region_name')->get();
+        return view('cities.create',compact('cities','regions'));
     }
 
 
@@ -92,37 +90,59 @@ class CityController extends Controller
     } //create 
 
 
-    public function edit($city_id)
-    {
-        try {
-            $citys = CityModel::findOrFail($city_id); // ใช้ findOrFail เพื่อให้เจอหรือ 404
-            $region = RegionModel::orderBy('region_id')->get();
+public function edit($city_id){
+            
+            try {
+               
+                $cities = CityModel::findOrFail($city_id);
+                $regions = RegionModel::orderBy('region_id', 'desc')->get();
 
-            //ประกาศตัวแปรเพื่อส่งไปที่ view
-            if (isset($city)) {
-                $city_id = $city->city_id;
-                $city_name = $city->city_name;
-                return view('citys.edit', compact('city_id', 'city_name', 'region_id'));
+                
+                if (isset($cities) &&  isset($regions)){
+                    $city_id = $cities->city_id;
+                    $city_name = $cities->city_name;
+                    $region_id = $cities->region_id;
+                    return view('cities.edit', compact('city_id', 'city_name','region_id','regions'));
+                }
+            }         
+            catch (\Exception $e) {
+                return view('errors.404');
             }
-        } catch (\Exception $e) {
-            // return response()->json(['error' => $e->getMessage()], 500); //สำหรับ debug
-            return view('errors.404');
         }
-    } //func edit
+        // EDIT() FUNCTION END
+// public function edit($city_id)
+//     {
+//         try {
+//             $citys = CityModel::findOrFail($city_id); // ใช้ findOrFail เพื่อให้เจอหรือ 404
+//             $regions = RegionModel::orderBy('region_id', 'desc')->get();
+//             $citys = CityModel::orderBy('city_id')->get();
+
+//             //ประกาศตัวแปรเพื่อส่งไปที่ view
+//             if (isset($citys)  &&  isset($regions)) {
+//                 $city_id = $citys->city_id;
+//                 $city_name = $citys->city_name;
+//                 return view('citys.edit', compact('city_id', 'city_name','region_id'));
+//             }
+//         } catch (\Exception $e) {
+//             // return response()->json(['error' => $e->getMessage()], 500); //สำหรับ debug
+//             return view('errors.404');
+//         }
+//     } //func edit
 
     public function update($city_id, Request $request)
     {
 
-        try {
-            // ดึงข้อมูลสินค้าตามไอดี ถ้าไม่เจอจะ throw Exception
-            $city = CityModel::findOrFail($city_id);
+    try {
+        // ดึงข้อมูลสินค้าตามไอดี ถ้าไม่เจอจะ throw Exception
+        $cities = CityModel::findOrFail($city_id);
 
-            // อัปเดตชื่อสินค้า โดยใช้ strip_tags ป้องกันการแทรกโค้ด HTML/JS
-            $city->city_name = strip_tags($request->region_name);
+        // อัปเดตชื่อสินค้า โดยใช้ strip_tags ป้องกันการแทรกโค้ด HTML/JS
+        $cities->city_name = strip_tags($request->city_name);
+        $cities->region_id = $request->region_id;
 
 
-            // บันทึกการเปลี่ยนแปลงในฐานข้อมูล
-            $city->save();
+        // บันทึกการเปลี่ยนแปลงในฐานข้อมูล
+        $cities->save();
 
             // แสดง SweetAlert แจ้งว่าบันทึกสำเร็จ
             Alert::success('Update Successfully');
@@ -141,18 +161,18 @@ class CityController extends Controller
 
 
 
-    public function remove($city_id)
-    {
-        try {
-            $city = CityModel::find($city_id); //คิวรี่เช็คว่ามีไอดีนี้อยู่ในตารางหรือไม่
+public function remove($city_id)
+{
+    try {
+        $cities =CityModel::find($city_id); //คิวรี่เช็คว่ามีไอดีนี้อยู่ในตารางหรือไม่
 
             if (!$city_id) {   //ถ้าไม่มี
                 Alert::error('City not found.');
                 return redirect('city');
             }
 
-            // ลบข้อมูลจาก DB
-            $city->delete();
+        // ลบข้อมูลจาก DB
+        $cities->delete();
 
             Alert::success('Delete Successfully');
             return redirect('city');
