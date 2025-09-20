@@ -8,6 +8,22 @@ use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
+
+    public function __construct()
+    {
+        // Require authentication as admin
+        $this->middleware('auth:web');
+
+
+        $this->middleware(function ($request, $next) {
+            if (auth()->check() && auth()->user()->user_role === 'admin') {
+                return $next($request);
+            }
+            // Redirect non-admin users to home page
+            return redirect('/');
+        });
+    }
+
     public function index()
     {
         try {

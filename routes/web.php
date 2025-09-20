@@ -9,6 +9,7 @@ use App\Http\Controllers\CityController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\AuthController;
 
 
 /* HOME PAGE */
@@ -93,3 +94,16 @@ Route::get('/dashboard', [DashboardController::class, 'index']);
 Route::post('/dashboard/table', [DashboardController::class, 'searchTable']);
 Route::get('/dashboard/chart-data', [DashboardController::class, 'chartData']);
 /* DASHBOARD PAGE END */
+
+/** AUTHENTICATION ROUTE
+ *  @USAGE : LOGIN, LOGOUT, REGISTER, FORGOT PASSWORD, RESET PASSWORD
+ */
+Route::get('/login', [AuthController::class, 'index'])->name('login');
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+// protected routes (ต้อง login ก่อนถึงจะเข้าได้)
+Route::middleware('auth:web')->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+});
+/* AUTHENTICATION PAGE END */

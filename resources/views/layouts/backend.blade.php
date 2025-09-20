@@ -19,7 +19,7 @@
         <div class="col">
           <!-- .alert START  -->
           <div class="alert alert-dark text-center" role="alert">
-            <h4>Back Office || Laravel 12 || ยินดีต้อนรับคุณ Admin</h4>
+            <h4>Back Office || Laravel 12 || ยินดีต้อนรับคุณ No {{session('user_id')}} Mr {{session('user_name')}}</h4>
           </div>
           <!-- .alert END  -->    
           </div>
@@ -50,6 +50,16 @@
             <a href="/comment" class="list-group-item list-group-item-action">  - COMMENT CRUD </a>
             <a href="/city" class="list-group-item list-group-item-action">  - CITY CRUD </a>
             <a href="/category" class="list-group-item list-group-item-action">  - CATEGORY CRUD </a>
+
+            <a href="#" 
+              class="list-group-item list-group-item-action list-group-item-danger"
+              onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+              ออกจากระบบ
+            </a>
+
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display:none;">
+                @csrf
+            </form>
             <!-- SIDE VIEW END -->
           </div>  
           <!-- .list-group END  -->
