@@ -36,8 +36,8 @@
                 <!-- Default Value -->
                 <option value="">-- Select Region --</option>
                 <!-- Foreach Category -->
-                @foreach ($region as $region)
-                <option value="{{ $region->region_id }}">{{ $region->region_name }}</option>
+                @foreach ($regions as $regions)
+                <option value="{{ $regions->region_id }}">{{ $regions->region_name }}</option>
                 @endforeach
                 <!-- Foreach Category End -->
             </select>

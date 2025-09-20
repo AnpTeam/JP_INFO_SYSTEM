@@ -26,6 +26,26 @@
         </div>
     </div>
 
+    <!-- Region Dropdown -->
+    <div class="form-group row mb-2">
+        <label class="col-sm-2">Region </label>
+        <div class="col-sm-6">
+            @csrf
+            <select id="role" name="region_id" class="form-select">
+                <!-- Foreach region -->
+                @foreach ($regions as $region)
+                <option value="{{ $region->region_id }}">{{ $region->region_name }}</option>
+                @endforeach
+                <!-- Foreach region End -->
+            </select>
+            @if(isset($errors))
+            @if($errors->has('region_id'))
+            <div class="text-danger"> {{ $errors->first('region_id') }}</div>
+            @endif
+            @endif
+        </div>
+    </div>
+
     <!-- Update & Cancel -->
     <div class="form-group row mb-2">
         <label class="col-sm-2"> </label>

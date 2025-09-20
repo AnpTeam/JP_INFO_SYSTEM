@@ -33,7 +33,7 @@
 
                 <!-- Table Data -->
                 <tbody>
-                    @foreach($city as $row)
+                    @foreach($cities as $row)
                     <tr>
                         <!-- No. -->
                         <td align="center">{{ $loop->iteration }}</td>
@@ -82,7 +82,7 @@
     
     <!-- Links -->
     <div>
-        {{ $city->links() }}
+        {{ $cities->links() }}
     </div>
 
 
