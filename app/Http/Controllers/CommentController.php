@@ -121,7 +121,7 @@ class CommentController extends Controller
 
         //rule ตั้งขึ้นว่าจะเช็คอะไรบ้าง
         $validator = Validator::make($request->all(), [
-            'user_id' => 'required|min:3|',
+            'user_id' => 'required',
             'comment_desc' => 'required|min:5',
             'attr_id' => 'required',
         ], $messages);
@@ -180,38 +180,28 @@ class CommentController extends Controller
 
     public function update($id, Request $request)
     {
-        // //error msg
-        //  $messages = [
-        //     'std_code.required' => 'กรุณากรอกข้อมูล',
-        //     'std_code.min' => 'ต้องมีอย่างน้อย :min ตัวอักษร',
-        //     'std_code.unique' => 'ข้อมูลซ้ำ',
-        //     'std_name.required' => 'กรุณากรอกข้อมูล',
-        //     'std_name.min' => 'ต้องมีอย่างน้อย :min ตัวอักษร',
-        //     'std_phone.required' => 'กรุณากรอกข้อมูล',
-        //     'std_phone.min' => 'ต้องมีอย่างน้อย :min ตัวอักษร',
-        //     'std_phone.max' => 'ห้ามเกิน :max ตัวอักษร',
-        //     'std_img.mimes' => 'รองรับ jpeg, png, jpg เท่านั้น !!',
-        //     'std_img.max' => 'ขนาดไฟล์ไม่เกิน 5MB !!',
-        // ];
+        $messages = [
+            'user_id.required' => 'กรุณากรอกข้อมูล',
 
-        // // ตรวจสอบข้อมูลจากฟอร์มด้วย Validator
-        // $validator = Validator::make($request->all(), [
-        //     'std_code' => [
-        //                 'required',
-        //                 'min:3',
-        //                     Rule::unique('tbl_student', 'std_code')->ignore($id, 'id'), //ห้ามแก้ซ้ำ
-        //         ],
-        //     'std_name' => 'required|min:5',
-        //     'std_phone' => 'required|min:10|max:10',
-        //     'std_img' => 'nullable|image|mimes:jpeg,png,jpg|max:5120',
-        // ], $messages);
+            'comment_desc.required' => 'กรุณากรอกข้อมูล',
+            'comment_desc.min' => 'ต้องมีอย่างน้อย :min ตัวอักษร',
 
-        // ถ้า validation ไม่ผ่าน ให้กลับไปหน้าฟอร์มพร้อมแสดง error และข้อมูลเดิม
-        // if ($validator->fails()) {
-        //     return redirect('comment/' . $id)
-        //         ->withErrors($validator)
-        //         ->withInput();
-        // }
+            'attr_id.required' => 'กรุณากรอกข้อมูล',
+        ];
+
+        //rule ตั้งขึ้นว่าจะเช็คอะไรบ้าง
+        $validator = Validator::make($request->all(), [
+            'user_id' => 'required',
+            'comment_desc' => 'required|min:5',
+            'attr_id' => 'required',
+        ], $messages);
+
+        //ถ้า validation ไม่ผ่าน ให้กลับไปหน้าฟอร์มพร้อมแสดง error และข้อมูลเดิม
+        if ($validator->fails()) {
+            return redirect('comment/' . $id)
+                ->withErrors($validator)
+                ->withInput();
+        }
 
         try {
             // ดึงข้อมูลสินค้าตามไอดี ถ้าไม่เจอจะ throw Exception
