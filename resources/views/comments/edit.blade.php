@@ -5,11 +5,14 @@
 @section('sidebarMenu')
 @section('content')
 
-<h3> :: form Update Attraction :: </h3>
 
 <form action="/comment/{{ $id }}" method="post" enctype="multipart/form-data">
     @csrf
     @method('put')
+
+        <!-- Title -->
+    <h1 class=" fw-bold mb-4 text-dark">COMMENT EDIT FORM </h1>
+    
     <!-- User Dropdown -->
     <div class="form-group row mb-2">
         <label class="col-sm-2">User Name </label>

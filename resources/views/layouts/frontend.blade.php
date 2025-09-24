@@ -156,18 +156,18 @@
                     <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
                     <li class="nav-item">
                         @if (Auth::check())
-                        <a href="#" class="nav-link"
-                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                            Log out
-                        </a>
+                            <a href="#" class="nav-link"
+                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                Log out
+                            </a>
 
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display:none;">
-                            @csrf
-                        </form>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display:none;">
+                                @csrf
+                            </form>
                         @else
-                        <a href="{{ route('login') }}" class="nav-link">Log in</a>
+                            <a href="{{ route('login') }}" class="nav-link">Log in</a>
                         @endif
-                        
+
                     </li>
                 </ul>
             </div>
@@ -184,16 +184,14 @@
     <footer class="mt-5 mb-2">
         <p class="text-center">by devbanban.com @2025</p>
     </footer>
-
     @yield('footer')
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous">
-        </script>
-
-
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     @yield('js_before')
 
+    <!-- Import JS SweetALert -->
+    @include('sweetalert::alert')
 </body>
 
 </html>
