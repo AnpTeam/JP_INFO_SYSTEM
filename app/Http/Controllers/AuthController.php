@@ -59,7 +59,7 @@ class AuthController extends Controller
             // Redirect based on user role
             if ($user->user_role === 'admin') {
                 // Redirect admin to dashboard
-                return redirect('/dashboard');
+                return redirect('/user');
             } else {
                 // Redirect regular user to home page
                 return redirect('/');

@@ -35,7 +35,7 @@
                         <td align="center">{{ $row->category_id }}</td>
 
                         <td>
-                            <b>Name: {{ $row->category_name }}</b> <br>
+                            {{ $row->category_name }}<br>
                         </td>
                         <td align="center">
                             <a href="/category/{{ $row->category_id }}" class="btn btn-warning btn-sm">edit</a>

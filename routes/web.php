@@ -90,7 +90,6 @@ Route::delete('/category/remove/{id}', [CategoryController::class, 'remove']);
 /** DASHBOARD ROUTE
  *  @USAGE : SHOW DASHBOARD FOR ANALYTICS
  */
-Route::get('/dashboard', [DashboardController::class, 'index']);
 Route::get('/dashboard/table', [DashboardController::class, 'searchTable'])->name('dashboard.table');
 Route::get('/dashboard/chart-data', [DashboardController::class, 'chartData']);
 /* DASHBOARD PAGE END */
