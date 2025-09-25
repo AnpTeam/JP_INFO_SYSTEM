@@ -493,5 +493,30 @@ class AttractionController extends Controller
         }
     }
     // REMOVE() FUNCTION END
+
+    public function like($id)
+    {
+        $attr = AttractionModel::findOrFail($id);
+        $user = auth()->user();
+
+        if ($attr->likes()->where('attraction_user_likes.user_id', $user->user_id)->exists()) {
+            $attr->likes()->detach($user->user_id);
+            $status = 'unliked';
+        } else {
+            $attr->likes()->attach($user->user_id);
+            $status = 'liked';
+        }
+
+        // 🔁 เช็กว่าเป็น AJAX หรือไม่
+        if (request()->ajax()) {
+            return response()->json([
+                'status' => $status,
+                'likes_count' => $attr->likes()->count()
+            ]);
+        } else {
+            // 🔁 กดปุ่มแบบธรรมดา → redirect กลับหน้าเดิม
+            return back();
+        }
+    }
 }
 // CLASS END

@@ -20,7 +20,6 @@
         </div>
     </div>
 
-
     <div class="container my-5">
         <div class="row align-items-start px-6">
             <!-- ข้อความ -->
@@ -34,10 +33,28 @@
                     <li>City : {{ \Illuminate\Support\Str::limit($city_name, 100) }} </li>
                     <li>Region : {{ \Illuminate\Support\Str::limit($region_name, 100) }} </li>
                 </ul>
+                @php
+                    $liked = auth()->check() && DB::table('attraction_user_likes')
+                        ->where('user_id', auth()->user()->user_id)
+                        ->where('attraction_id', $attr_id)
+                        ->exists();
+
+                    $likes_count = DB::table('attraction_user_likes')
+                        ->where('attraction_id', $attr_id)
+                        ->count();
+                @endphp
+
+                <form action="{{ route('attraction.like', $attr_id) }}" method="post" class="d-inline form-like">
+                    @csrf
+                    <button type="submit" class="btn btn-like {{ $liked ? 'btn-danger' : 'btn-outline-danger' }}">
+                        <i class="{{ $liked ? 'fa-solid' : 'fa-regular' }} fa-heart"></i>
+                        <span>{{ $likes_count }}</span>
+                    </button>
+                </form>
             </div>
 
             <!-- Comment -->
-            <div>
+            <div class="mt-3">
                 <h4 class="mb-4">{{ $commentCount }} Comments</h4>
 
                 <!-- Write Comment -->
@@ -57,7 +74,6 @@
                         </div>
                     </form>
                 </div>
-
 
                 <!-- Show Comment -->
                 @php
@@ -154,6 +170,30 @@
                     const hasText = textarea.value.trim().length > 0;
                     submitBtn.disabled = !hasText;
                 }
+            });
+        </script>
+
+        <script>
+            $(document).on('click', '.btn-like', function (e) {
+                e.preventDefault();
+                let form = $(this).closest('form');
+                let button = form.find('button');
+                let countSpan = form.find('span');
+                let icon = form.find('i');
+
+                $.post(form.attr('action'), form.serialize(), function (res) {
+                    // อัปเดตจำนวนไลค์
+                    countSpan.text(res.likes_count);
+
+                    // เปลี่ยนปุ่มตามสถานะ like/unlike
+                    if (res.status === 'liked') {
+                        button.removeClass('btn-outline-danger').addClass('btn-danger');
+                        icon.removeClass('fa-regular').addClass('fa-solid');
+                    } else {
+                        button.removeClass('btn-danger').addClass('btn-outline-danger');
+                        icon.removeClass('fa-solid').addClass('fa-regular');
+                    }
+                });
             });
         </script>
 @endsection

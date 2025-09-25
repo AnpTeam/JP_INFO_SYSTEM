@@ -18,4 +18,10 @@ class UserModel extends Authenticatable
     {
         return $this->user_password;
     }
+
+    public function likedAttractions()
+{
+        return $this->belongsToMany(AttractionModel::class, 'attraction_user_likes', 'user_id', 'attraction_id')->withTimestamps();
+}
+
 }

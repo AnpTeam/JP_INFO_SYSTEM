@@ -7,7 +7,6 @@
 <!-- Hero Carousel Section -->
 <div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="5000">
     <div class="carousel-inner">
-
         @foreach($attrs as $attr)
         <!-- Slide Coraousel -->
         <div class="carousel-item active">
@@ -47,7 +46,6 @@
             </div>
         </div>
         @endforeach
-
     </div>
 
     <!-- Optional Controls -->

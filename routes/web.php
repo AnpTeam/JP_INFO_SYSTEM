@@ -46,6 +46,8 @@ Route::post('/attraction', [AttractionController::class, 'create']);
 Route::get('/attraction/{id}', [AttractionController::class, 'edit']);
 Route::put('/attraction/{id}', [AttractionController::class, 'update']);
 Route::delete('/attraction/remove/{id}', [AttractionController::class, 'remove']);
+
+Route::post('/attraction/{id}/like', [AttractionController::class, 'like'])->name('attraction.like');
 /* ATTRACTION ROUTE END */
 
 /** REGION ROUTE
@@ -114,4 +116,9 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::middleware('auth:web')->group(function () {
     Route::post('/addComment', [HomeController::class, 'addComment'])->name('addComment');
 });
+
+Route::post('/attraction/{id}/like', [AttractionController::class, 'like'])
+    ->middleware('auth')
+    ->name('attraction.like');
+
 /* AUTHENTICATION PAGE END */
