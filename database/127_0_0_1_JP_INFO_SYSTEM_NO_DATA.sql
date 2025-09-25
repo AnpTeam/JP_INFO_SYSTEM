@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 07, 2025 at 05:25 PM
+-- Generation Time: Sep 25, 2025 at 07:48 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -36,7 +36,8 @@ CREATE TABLE `tbl_attraction` (
   `attr_desc` varchar(300) NOT NULL,
   `category_id` int(11) NOT NULL DEFAULT 0,
   `like_count` int(11) NOT NULL DEFAULT 0,
-  `city_id` int(11) NOT NULL
+  `city_id` int(11) NOT NULL,
+  `date_created` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -73,8 +74,21 @@ CREATE TABLE `tbl_comment` (
   `user_id` int(11) NOT NULL,
   `comment_desc` varchar(300) NOT NULL,
   `attr_id` int(11) NOT NULL,
-  `like_count` int(11) NOT NULL DEFAULT 0
+  `like_count` int(11) NOT NULL DEFAULT 0,
+  `date_created` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_counter`
+--
+
+CREATE TABLE `tbl_counter` (
+  `c_id` int(10) NOT NULL,
+  `attr_id` int(11) NOT NULL,
+  `c_date` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -100,7 +114,7 @@ CREATE TABLE `tbl_user` (
   `user_name` varchar(100) NOT NULL,
   `user_password` varchar(200) NOT NULL,
   `user_email` varchar(100) NOT NULL,
-  `user_phone` int(11) NOT NULL,
+  `user_phone` varchar(10) NOT NULL,
   `user_role` set('user','admin') NOT NULL,
   `date_created` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -134,6 +148,12 @@ ALTER TABLE `tbl_city`
 --
 ALTER TABLE `tbl_comment`
   ADD PRIMARY KEY (`comment_id`);
+
+--
+-- Indexes for table `tbl_counter`
+--
+ALTER TABLE `tbl_counter`
+  ADD PRIMARY KEY (`c_id`);
 
 --
 -- Indexes for table `tbl_region`
@@ -180,10 +200,16 @@ ALTER TABLE `tbl_comment`
   MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `tbl_counter`
+--
+ALTER TABLE `tbl_counter`
+  MODIFY `c_id` int(10) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `tbl_region`
 --
 ALTER TABLE `tbl_region`
-  MODIFY `region_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `region_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tbl_user`

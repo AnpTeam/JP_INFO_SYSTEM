@@ -24,8 +24,8 @@
                 <thead>
                     <tr class="">
                         <th width="5%" class="text-center">No.</th>
-                        <th width="50%">City Name  </th>
-                        <th width="25%">Region  </th>
+                        <th width="25%" class="text-center">City Name  </th>
+                        <th width="25%" class="text-center">Region  </th>
                         <th width="5%" class="text-center">edit</th>
                         <th width="5%" class="text-center">delete</th>
                     </tr>
@@ -39,8 +39,8 @@
                         <td align="center">{{ $loop->iteration }}</td>
 
                         <!-- City Name -->
-                        <td>
-                            <b>Name: {{ $row->city_name }}</b> <br>
+                        <td align="center">
+                            {{ $row->city_name }} <br>
                         </td>
 
                         <!-- Region Name -->

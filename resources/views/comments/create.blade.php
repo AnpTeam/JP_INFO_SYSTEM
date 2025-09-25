@@ -52,7 +52,7 @@
     </div>
 
     <!-- Attraction Dropdown -->
-    <div class="form-group row mb-4">
+    <div class="form-group row mb-2">
         <label class="col-sm-12 mb-2">Attraction </label>
         <div class="col-sm-12">
             @csrf
@@ -77,8 +77,8 @@
     <div class="form-group row mb-4">
         <label class="col-sm-2 mb-2"> </label>
         <div class="col-sm-12">
-            <button type="submit" class="btn btn-outline-primary me-3 p-2"> Insert Comment </button>
-            <a href="/comment" class="btn btn-outline-danger p-2">Cancel</a>
+            <button type="submit" class="btn btn-primary me-3 p-2"> Insert Comment </button>
+            <a href="/comment" class="btn btn-danger p-2">Cancel</a>
         </div>
     </div>
 </form>

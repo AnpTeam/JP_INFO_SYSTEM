@@ -81,7 +81,7 @@
     </div>
 
     <!-- Attraction Picture -->
-    <div class="form-group row mb-2">
+    <div class="form-group row mb-3">
         <label class="col-sm-2"> Pic </label>
         <div class="col-sm-6">
             old img <br>

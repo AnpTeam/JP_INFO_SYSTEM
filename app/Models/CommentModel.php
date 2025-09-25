@@ -12,7 +12,7 @@ class CommentModel extends Model
 {
     protected $table = 'tbl_comment';
     protected $primaryKey = 'comment_id';
-    protected $fillable = ['user_id', 'comment_desc','attr_id','like_count'];
+    protected $fillable = ['user_id', 'comment_desc','attr_id','like_count','date_created'];
     public $incrementing = true;
     public $timestamps = false;
 }
