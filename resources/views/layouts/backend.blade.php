@@ -132,7 +132,7 @@
           <li class="nav-item">
             <a href="{{ route('logout') }}" class="nav-link text-white d-flex align-items-center"
               onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-              <i class="fa-solid fa-right-from-bracket" style="width: 20px;"></i>
+              <i class="fa-solid fa-right-from-bracket me-2" style="width: 20px;"></i>
               <span class="ms-2">Log Out</span>
             </a>
             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

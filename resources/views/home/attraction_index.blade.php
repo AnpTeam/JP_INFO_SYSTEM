@@ -67,36 +67,39 @@
 
 
 
-<div class="container mt-2 align-item-center ">
+    <div class="container mt-2 align-item-center ">
 
-    <div class="row ">
-        @foreach($topThree as $attr)
-        <div class="col-12 col-sm-4 col-md-4 col-lg-4 mb-4">
-            <div class="card card-overlay-center">
-                <img src="{{ asset('storage/' . $attr->attr_thumbnail) }}" alt="{{ $attr->attr_name }}" class="card-img">
-                <div class="caption-center">
-                    <div class="location-icon">
-                        <i class="fas fa-location-dot"></i>
+        <div class="row ">
+            @foreach($topThree as $attr)
+                <div class="col-12 col-sm-4 col-md-4 col-lg-4 mb-4">
+                    <a href="/detail/{{ $attr->attr_id }}">
+                        <div class="card card-overlay-center">
+                            <img src="{{ asset('storage/' . $attr->attr_thumbnail) }}" alt="{{ $attr->attr_name }}" class="card-img">
+                            <div class="caption-center">
+                                <div class="location-icon">
+                                    <i class="fas fa-location-dot"></i>
 
-                    </div>
-                    <h4 class="card-title">{{$attr->attr_name}}</h4>    
+                                </div>
+                                <h4 class="card-title">{{$attr->attr_name}}</h4>
 
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- 
+
+                    <div class="card" style="width: 100%;" id="topAttraction">
+                        <a href="/detail/">
+                            <img src="{{ asset('storage/' . $attr->attr_thumbnail) }}" class="card-img-top" alt="devbanban.com">
+                        </a>
+                        <a href="/detail/" class="link-offset-2 link-underline link-underline-opacity-0">
+                            {{$attr->attr_name}}
+                        </a>
+
+                    </div> -->
                 </div>
-            </div>
-            <!-- 
-
-            <div class="card" style="width: 100%;" id="topAttraction">
-                <a href="/detail/">
-                    <img src="{{ asset('storage/' . $attr->attr_thumbnail) }}" class="card-img-top" alt="devbanban.com">
-                </a>
-                <a href="/detail/" class="link-offset-2 link-underline link-underline-opacity-0">
-                    {{$attr->attr_name}}
-                </a>
-
-            </div> -->
-        </div>
-        @endforeach
-        @endsection
+            @endforeach
+@endsection
 
     </div>
 </div>

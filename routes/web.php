@@ -14,8 +14,12 @@ use App\Http\Controllers\AuthController;
 
 /* HOME PAGE */
 Route::get('/', [HomeController::class, 'index']);
-Route::get('/search', [HomeController::class, 'searchAttraction']);
+Route::get('/search', [HomeController::class, 'searchAttraction'])->name('search');
+Route::get('/searchRegion', [HomeController::class, 'searchRegion'])->name('searchRegion');
 Route::get('/detail/{id}', [HomeController::class, 'detailAttraction']);
+Route::get('/detailRegion/{id}', [HomeController::class, 'detailRegion']);
+
+Route::post('/addComment', [HomeController::class, 'addComment'])->name('addComment');
 /* HOME PAGE END */
 
 /** USER ROUTE
@@ -104,6 +108,6 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // protected routes (ต้อง login ก่อนถึงจะเข้าได้)
 Route::middleware('auth:web')->group(function () {
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::post('/addComment', [HomeController::class, 'addComment'])->name('addComment');
 });
 /* AUTHENTICATION PAGE END */

@@ -150,24 +150,32 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="text-light nav-link active" href="/">Home</a></li>
-                    <li class="nav-item"><a class="text-light nav-link" href="#">Listings</a></li>
-                    <li class="nav-item"><a class="text-light nav-link" href="#">About</a></li>
-                    <li class="nav-item"><a class="text-light nav-link" href="/detail">Blog</a></li>
-                    <li class="nav-item"><a class="text-light nav-link" href="/dashboard">Back office</a></li>
-                    <li class="nav-item">
+                    <li class="nav-item"><a class="text-light nav-link"
+                            href="{{ route('search', ['%']) }}">Attractions</a></li>
+                    <li class="nav-item"><a class="text-light nav-link"
+                            href="{{ route('searchRegion', ['%']) }}">Regions</a></li>
+                    <li class="nav-item"><a class="text-light nav-link" href="/user">Back Office</a></li>
+
+                    <li class="nav-item ms-5">
                         @if (Auth::check())
-                        <a href="#" class="nav-link text-light"
-                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                            Log out
-                        </a>
+                            <a href="#" class="nav-link text-light"
+                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                <i class="fa-solid fa-right-to-bracket me-2"></i>
+                                Log out
+                            </a>
+
 
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display:none;">
                                 @csrf
                             </form>
-                        @else
-                        <a href="{{ route('login') }}" class="bg-primary text-light nav-link">Log in</a>
-                        @endif
 
+
+                        @else
+                            <a href="{{ route('login') }}" class="text-light nav-link fw-bold">
+                                <i class="fa-solid fa-right-to-bracket me-2"></i>
+                                Log in
+                            </a>
+                        @endif
                     </li>
                 </ul>
             </div>

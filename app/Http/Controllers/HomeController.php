@@ -4,11 +4,12 @@ namespace App\Http\Controllers;
 use App\Models\AttractionModel;           //รับค่าจากฟอร์ม
 use App\Models\CityModel;                 //form validation
 use App\Models\RegionModel;               //sweet alert
+use App\Models\CommentModel;
 use Illuminate\Http\Request;              //สำหรับเก็บไฟล์ภาพ
 use Illuminate\Pagination\Paginator;      //แบ่งหน้า
-use Illuminate\Support\Facades\DB;        //model
-use Illuminate\Support\Facades\Storage;   //model
-use Illuminate\Support\Facades\Validator; //model
+use Illuminate\Support\Facades\DB;       //model
+use Illuminate\Support\Facades\Validator; //ตรวจสอบข้อมูล
+use RealRashid\SweetAlert\Facades\Alert; //sweet alert
 
 class HomeController extends Controller
 {
@@ -111,8 +112,7 @@ class HomeController extends Controller
 
     } // searchattrs
 
-
-    public function detailAttraction(Request $request)
+    public function searchRegion(Request $request)
     {
 
         // print_r($_GET);
@@ -122,54 +122,115 @@ class HomeController extends Controller
         Paginator::useBootstrap(); // ใช้ Bootstrap pagination
 
         $keyword = $request->keyword;
-        $region  = $request->region;
-        $city    = $request->city;
-        $category= $request->category;
 
 /** DATABASE QUERY
  *  @SQL Syntax
  * ==========================
  *  SELECT *
- *  FROM tbl_attraction
- *  JOIN tbl_category
- *  ON tbl_attraction.category_id = tbl_category.category_id
- *  JOIN tbl_city
- *  ON tbl_attraction.city_id = tbl_city.city_id
- *  ORDER BY attr_id ASC
- *  LIMIT 5
+ *  FROM tbl_region
  *  =============================
  *  @Fetch Variable : $attrs
  *  @Tools : DB, Paginator
  */
-        $query = AttractionModel::query()
-            ->join('tbl_city', 'tbl_attraction.city_id', '=', 'tbl_city.city_id')
-            ->join('tbl_region', 'tbl_city.region_id', '=', 'tbl_region.region_id')
-            ->join('tbl_category', 'tbl_attraction.category_id', '=', 'tbl_category.category_id');
+        $query = RegionModel::query();
 
 // Apply filters conditionally
         if (! empty($keyword)) {
-            $query->where('attr_name', 'like', "%{$keyword}%");
+            $query->where('region_name', 'like', "%{$keyword}%");
         }
-
-        if (! empty($region)) {
-            $query->where('tbl_region.region_id', $region);
-        }
-
-        if (! empty($city)) {
-            $query->where('tbl_city.city_id', $city);
-        }
-        if (! empty($category)) {
-            $query->where('tbl_category.category_id', $category);
-        }
-
 // Run the query with pagination
-        $attrs = $query->paginate(8);
+        $regions = $query->paginate(8);
 
 // Count total results
-        $count = $attrs->Total(); // use total(), not count() when paginating
+        $count = $regions->Total(); // use total(), not count() when paginating
 
-        return view('home.attraction_detail', compact('attrs', 'keyword', 'count', 'city', 'region','category'));
+        return view('home.region_search', compact('regions', 'keyword', 'count'));
 
+    } // searchattrs
+
+
+    public function detailAttraction($id)
+    {
+        try {
+            $attr = DB::table('tbl_attraction')
+                ->join('tbl_city', 'tbl_attraction.city_id', '=', 'tbl_city.city_id')
+                ->join('tbl_region', 'tbl_city.region_id', '=', 'tbl_region.region_id')
+                ->join('tbl_category', 'tbl_attraction.category_id', '=', 'tbl_category.category_id')
+                ->where('tbl_attraction.attr_id', $id)
+                ->select(
+                    'tbl_attraction.*',
+                    'tbl_city.city_name',
+                    'tbl_region.region_name',
+                    'tbl_category.category_name'
+                )
+                ->first();
+
+            $comments = DB::table('tbl_comment')
+                ->join('tbl_user', 'tbl_comment.user_id', '=', 'tbl_user.user_id')
+                ->where('attr_id', $id)
+                ->orderBy('tbl_comment.date_created', 'desc')
+                ->get();
+
+            $commentCount = $comments->count();
+
+
+            //ประกาศตัวแปรเพื่อส่งไปที่ view
+            if (isset($attr)) {
+                $attr_id = $attr->attr_id;
+                $attr_name = $attr->attr_name;
+                $attr_desc = $attr->attr_desc;
+                $region_name = $attr->region_name;
+                $category_name = $attr->category_name;
+                $city_name = $attr->city_name;
+                $attr_thumbnail = $attr->attr_thumbnail;
+
+                return view('home.attraction_detail', compact('attr_id', 'attr_name', 'attr_desc', 'region_name', 'category_name', 'city_name', 'attr_thumbnail','comments','commentCount'));
+            }
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500); //สำหรับ debug
+            // return view('errors.404');
+            // return redirect('/');
+        }
     } // detailattrs
+
+        public function detailRegion($id)
+    {
+        try {
+            $region = RegionModel::findOrFail($id);
+
+
+            //ประกาศตัวแปรเพื่อส่งไปที่ view
+            if (isset($region)) {
+                $region_id = $region->region_id;
+                $region_name = $region->region_name;
+                $region_desc = $region->region_desc;
+                $region_thumbnail = $region->region_thumbnail;
+
+                return view('home.region_detail', compact('region_id', 'region_name', 'region_desc', 'region_thumbnail'));
+            }
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500); //สำหรับ debug
+            // return view('errors.404');
+            // return redirect('/');
+        }
+    } // detailRegion
+
+    public function addComment(Request $request)
+    {
+            try {
+            //insert เพิ่มข้อมูลลงตาราง
+            CommentModel::create([
+                'user_id' => strip_tags($request->user_id),
+                'comment_desc' => strip_tags($request->comment_desc),
+                'attr_id' => strip_tags($request->attr_id),
+            ]);
+
+            return redirect()->back();
+
+        } catch (\Exception $e) {  //error debug
+            return response()->json(['error' => $e->getMessage()], 500); //สำหรับ debug
+            //return view('errors.404');
+        }
+    } // addComment
 
 } //class
