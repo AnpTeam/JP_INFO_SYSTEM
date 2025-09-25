@@ -6,13 +6,8 @@
 @section('navbar')
 @endsection
  
-@section('imgSlide')
+@section('showLogin')    
 @endsection
- 
-@section('showProduct')    
-@endsection
-
- 
 
 @section('footer')
 @endsection

@@ -106,6 +106,10 @@ Route::get('/login', [AuthController::class, 'index'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
+Route::get('/register', [AuthController::class, 'registerForm']);
+Route::post('/register', [AuthController::class, 'register']);
+
+
 // protected routes (ต้อง login ก่อนถึงจะเข้าได้)
 Route::middleware('auth:web')->group(function () {
     Route::post('/addComment', [HomeController::class, 'addComment'])->name('addComment');

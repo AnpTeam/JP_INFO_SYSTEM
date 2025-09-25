@@ -1,86 +1,95 @@
 <!doctype html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Laravel 12 Basic CRUD by devbanban.com 2025</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+    <title>@yield('title', 'Japan Information System')</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+
+    <!-- Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+
+    <!-- Custom CSS -->
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            padding-top: 80px; /* fix navbar overlap */
+        }
+
+        .logo-img {
+            height: 50px;
+            width: auto;
+            max-height: 50px;
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+        }
+
+        footer {
+            margin-top: 80px;
+        }
+    </style>
+
     @yield('css_before')
-  </head>
-  <body>
+</head>
 
-    <!-- start navbar  --> 
-<div class="container">
-    <div class="row">
-    <div class="col-12 col-sm-12 col-md-12">
-<nav class="navbar navbar-expand-lg bg-primary">
-    <div class="container">
-      <a class="navbar-brand text-white" href="/">MyShop</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link active text-white" aria-current="page" href="/">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link text-white" href="https://devbanban.com/?p=4425">Shop</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link text-white" href="https://devbanban.com/?p=4425">Shop</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link text-white" href="https://devbanban.com/?p=4425">Shop</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link text-white" href="https://devbanban.com/?p=4425">Link</a>
-          </li>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-danger shadow-sm fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <img src="{{ asset('/storage/resource/logo-white.png') }}" alt="logo" class="logo-img">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link text-light" href="/">Home</a></li>
+                    <li class="nav-item"><a class="nav-link text-light" href="{{ route('search', ['%']) }}">Attractions</a></li>
+                    <li class="nav-item"><a class="nav-link text-light" href="{{ route('searchRegion', ['%']) }}">Regions</a></li>
+                    <li class="nav-item"><a class="nav-link text-light" href="/user">Back Office</a></li>
 
-           <li class="nav-item">
-            <a class="nav-link text-white" href="/login">Login</a>
-          </li>
+                    <li class="nav-item ms-4">
+                        @if (Auth::check())
+                            <a href="#" class="nav-link text-light"
+                               onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                <i class="fa-solid fa-right-to-bracket me-2"></i> Log out
+                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display:none;">
+                                @csrf
+                            </form>
+                        @else
+                            <a href="{{ route('login') }}" class="nav-link text-light fw-bold">
+                                <i class="fa-solid fa-right-to-bracket me-2"></i> Log in
+                            </a>
+                        @endif
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
+    <!-- Main content -->
+    <main class="container">
+        @yield('showLogin')
+    </main>
 
-          
-          <li class="nav-item">
-            <a class="nav-link text-white" href="/dashboard" target="_blank">BackOffice</a>
-          </li>
-          
-        </ul>
-        <form action="/search" method="get" class="d-flex" role="search">
-          <input class="form-control me-2" type="text" name="keyword" placeholder="Search Product Name" aria-label="Search" required value="{{ $keyword ?? ''}}">
-          <button class="btn btn-success" type="submit">Search </button>
-        </form>
-      </div>
-    </div>
-  </nav>
-    </div>
-    </div>
-</div>
-  <!-- end navbar  -->
- 
-  @yield('navbar')
-
-
-
-
-  <div class="container mt-2">
-    <div class="row">
-        @yield('showProduct')
-    </div>
-  </div>
-
-
-    <footer class="mt-5 mb-2">
-      <p class="text-center">by devbanban.com @2025</p>
+    <!-- Footer -->
+    <footer class="text-center py-3 bg-light mt-auto">
+        <p class="mb-0">by devbanban.com @2025</p>
     </footer>
-    
-    @yield('footer')
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
-
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     @yield('js_before')
+    @include('sweetalert::alert')
+</body>
 
-  </body>
 </html>
