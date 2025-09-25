@@ -1,31 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-<<<<<<< HEAD
-  <!-- HEAD -->
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Laravel 12 Basic CRUD by devbanban.com 2025</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
-    @yield('css_before')
-  </head>
-  
-  <!-- BODY -->
-  <body>
-    <!-- .container START  -->
-    <div class="container">
-      <!-- .row START  -->
-      <div class="row">
-        <!-- .col START  -->
-        <div class="col">
-          <!-- .alert START  -->
-          <div class="alert alert-dark text-center bg-danger" role="alert">
-            <h4>Back Office || Laravel 12 || ยินดีต้อนรับคุณ No {{session('user_id')}} Mr {{session('user_name')}}</h4>
-          </div>
-          <!-- .alert END  -->    
-          </div>
-        <!-- .col END  -->          
-=======
 
 <head>
   <meta charset="UTF-8">
@@ -52,7 +26,6 @@
         <img src="{{asset('/storage/resource/logo-white.png')}}" alt="logo" class="logo-img offcanvas-title">
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
           data-bs-target="#sidebarMenu"></button>
->>>>>>> fc29b5089ca7771dcd7beca57abfdf4310e2b972
       </div>
 
       <!-- Logo -->
@@ -63,28 +36,6 @@
       <div>
         <ul class="nav flex-column">
 
-<<<<<<< HEAD
-    <!-- .container START  -->
-    <div class="container">
-      <!-- .row START  -->
-      <div class="row">
-        <!-- .col-md-3 START  -->
-        <div class="col-md-3">
-          <!-- .list-group START  -->
-          <div class="list-group">
-            <a class="list-group-item list-group-item-action active bg-danger border-danger" aria-current="true">
-              CRUD MANAGEMENT
-            </a>
-            <!-- SIDE VIEW -->
-            <a href="/" class="list-group-item list-group-item-action">  - HOME PAGE </a>
-            <a href="/dashboard" class="list-group-item list-group-item-action">  - DASHBOARD </a>
-            <a href="/user" class="list-group-item list-group-item-action">  - USER CRUD </a>
-            <a href="/attraction" class="list-group-item list-group-item-action">  - ATTRACTIONS CRUD </a>
-            <a href="/region" class="list-group-item list-group-item-action">  - REGION CRUD </a>
-            <a href="/comment" class="list-group-item list-group-item-action">  - COMMENT CRUD </a>
-            <a href="/city" class="list-group-item list-group-item-action">  - CITY CRUD </a>
-            <a href="/category" class="list-group-item list-group-item-action">  - CATEGORY CRUD </a>
-=======
           <!-- Home Page -->
           <li class="nav-item">
             <a href="/" class="nav-link text-white mb-2 d-flex align-items-center">
@@ -92,7 +43,6 @@
               <span class="ms-2">Return Homepage</span>
             </a>
           </li>
->>>>>>> fc29b5089ca7771dcd7beca57abfdf4310e2b972
 
           <!-- Dashboard -->
           <li class="nav-item">

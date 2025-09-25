@@ -156,27 +156,16 @@
                     <li class="nav-item"><a class="text-light nav-link" href="/dashboard">Back office</a></li>
                     <li class="nav-item">
                         @if (Auth::check())
-<<<<<<< HEAD
                         <a href="#" class="nav-link text-light"
                             onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                             Log out
                         </a>
-=======
-                            <a href="#" class="nav-link"
-                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                Log out
-                            </a>
->>>>>>> fc29b5089ca7771dcd7beca57abfdf4310e2b972
 
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display:none;">
                                 @csrf
                             </form>
                         @else
-<<<<<<< HEAD
                         <a href="{{ route('login') }}" class="bg-primary text-light nav-link">Log in</a>
-=======
-                            <a href="{{ route('login') }}" class="nav-link">Log in</a>
->>>>>>> fc29b5089ca7771dcd7beca57abfdf4310e2b972
                         @endif
 
                     </li>
