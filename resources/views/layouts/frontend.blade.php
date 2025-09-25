@@ -139,7 +139,7 @@
 
 
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-danger shadow-sm fixed-top">
         <div class="container">
             <a class="navbar-brand" href="/">
                 <img src="{{asset('/storage/resource/logo-white.png')}}" alt="logo" class="logo-img">
@@ -149,14 +149,14 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Listings</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">About</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Blog</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+                    <li class="nav-item"><a class="text-light nav-link active" href="/">Home</a></li>
+                    <li class="nav-item"><a class="text-light nav-link" href="#">Listings</a></li>
+                    <li class="nav-item"><a class="text-light nav-link" href="#">About</a></li>
+                    <li class="nav-item"><a class="text-light nav-link" href="/detail">Blog</a></li>
+                    <li class="nav-item"><a class="text-light nav-link" href="/dashboard">Back office</a></li>
                     <li class="nav-item">
                         @if (Auth::check())
-                        <a href="#" class="nav-link"
+                        <a href="#" class="nav-link text-light"
                             onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                             Log out
                         </a>
@@ -165,7 +165,7 @@
                             @csrf
                         </form>
                         @else
-                        <a href="{{ route('login') }}" class="nav-link">Log in</a>
+                        <a href="{{ route('login') }}" class="bg-primary text-light nav-link">Log in</a>
                         @endif
                         
                     </li>

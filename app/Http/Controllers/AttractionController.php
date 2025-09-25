@@ -38,20 +38,20 @@ class AttractionController extends Controller
 {
 
 
-    public function __construct()
-    {
-        // Require authentication as admin
-        $this->middleware('auth:web');
+    // public function __construct()
+    // {
+    //     // Require authentication as admin
+    //     $this->middleware('auth:web');
 
 
-        $this->middleware(function ($request, $next) {
-            if (auth()->check() && auth()->user()->user_role === 'admin') {
-                return $next($request);
-            }
-            // Redirect non-admin users to home page
-            return redirect('/');
-        });
-    }
+    //     $this->middleware(function ($request, $next) {
+    //         if (auth()->check() && auth()->user()->user_role === 'admin') {
+    //             return $next($request);
+    //         }
+    //         // Redirect non-admin users to home page
+    //         return redirect('/');
+    //     });
+    // }
 
     /** INDEX() FUNCTION
      *  @Usage for show list of field in database 

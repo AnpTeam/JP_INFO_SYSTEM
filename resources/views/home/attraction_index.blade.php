@@ -79,8 +79,7 @@
                         <i class="fas fa-location-dot"></i>
 
                     </div>
-                    <h4 class="card-title">{{$attr->attr_name}}</h4>
-                    <p class="card-text text-truncate">{{$attr->attr_desc}}</p>
+                    <h4 class="card-title">{{$attr->attr_name}}</h4>    
 
                 </div>
             </div>

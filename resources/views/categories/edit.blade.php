@@ -5,7 +5,7 @@
 @section('sidebarMenu')
 @section('content')
 
-<h3> :: form Update ฉategory :: </h3>
+<h3> :: form Update Category :: </h3>
 
 <form action="/category/{{ $category_id }}" method="post" enctype="multipart/form-data">
     @csrf

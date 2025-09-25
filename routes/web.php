@@ -15,6 +15,7 @@ use App\Http\Controllers\AuthController;
 /* HOME PAGE */
 Route::get('/', [HomeController::class, 'index']);
 Route::get('/search', [HomeController::class, 'searchAttraction']);
+Route::get('/detail/{id}', [HomeController::class, 'detailAttraction']);
 /* HOME PAGE END */
 
 /** USER ROUTE

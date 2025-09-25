@@ -22,16 +22,16 @@
 
                 {{-- Body --}}
                 <div class="card-body d-flex flex-column">
-                    <h5 class="card-title fw-bold text-primary">
+                    <h5 class="card-title fw-bold text-dark">
                         {{ $data->attr_name }}
                     </h5>
 
-                    <p class="card-text text-muted mt-2" style="flex-grow: 1;">
+                    <p class="card-text text-muted mt-2 " style="flex-grow: 1;"  >
                         {{ \Illuminate\Support\Str::limit($data->attr_desc, 100) }}
                     </p>
 
                     {{-- Optional button or footer --}}
-                    <a href="#" class="btn btn-outline-primary mt-3">Read More</a>
+                    <a href="{{"/detail"}}" class="btn btn-outline-primary mt-3">Read More</a>
                 </div>
             </div>
         </div>
@@ -42,18 +42,6 @@
         {{ $attrs->links() }}
     </div>
 </div>
-
-</div>
-
-
-
-
-
-
-
-
-
-
 
 
 

@@ -18,7 +18,7 @@
         <!-- .col START  -->
         <div class="col">
           <!-- .alert START  -->
-          <div class="alert alert-dark text-center" role="alert">
+          <div class="alert alert-dark text-center bg-danger" role="alert">
             <h4>Back Office || Laravel 12 || ยินดีต้อนรับคุณ No {{session('user_id')}} Mr {{session('user_name')}}</h4>
           </div>
           <!-- .alert END  -->    
@@ -39,10 +39,11 @@
         <div class="col-md-3">
           <!-- .list-group START  -->
           <div class="list-group">
-            <a href="/" class="list-group-item list-group-item-action active bg-danger border-danger" aria-current="true">
-              Home
+            <a class="list-group-item list-group-item-action active bg-danger border-danger" aria-current="true">
+              CRUD MANAGEMENT
             </a>
             <!-- SIDE VIEW -->
+            <a href="/" class="list-group-item list-group-item-action">  - HOME PAGE </a>
             <a href="/dashboard" class="list-group-item list-group-item-action">  - DASHBOARD </a>
             <a href="/user" class="list-group-item list-group-item-action">  - USER CRUD </a>
             <a href="/attraction" class="list-group-item list-group-item-action">  - ATTRACTIONS CRUD </a>
