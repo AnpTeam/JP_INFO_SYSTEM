@@ -31,7 +31,7 @@
                     </p>
 
                     {{-- Optional button or footer --}}
-                    <a href="/detailRegion/{{ $data->region_id }}" class="btn btn-outline-primary mt-3">Read More</a>
+                    <a href="/detailRegion/{{ $data->region_id }}" class="btn btn-outline-danger mt-3">Read More</a>
                 </div>
             </div>
         </div>

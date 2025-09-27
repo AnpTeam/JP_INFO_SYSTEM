@@ -16,7 +16,7 @@
         <div class="col-md-12">
             <!-- Title -->
             <h2 class="fw-bold mb-3"> User Managements Table
-                <a href="/user/adding" class="ms-3 btn btn-primary btn-sm"> + User </a>
+                <a href="/user/adding" class="ms-3 btn btn-sm bg-danger text-light"> + User </a>
             </h2>
 
             <!-- Table -->

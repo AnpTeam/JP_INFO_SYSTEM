@@ -10,16 +10,18 @@
 @endsection
 
 @section('content')
+
 <div class="container mt-4">
     <div class="row">
         <div class="col-md-12">
             <!-- Title & Add Button -->
             <h2 class="fw-bold mb-3"> Attraction Managements Table
-                <a href="/attraction/adding" class="ms-3 btn btn-primary btn-sm"> + Attraction </a>
+                <a href="/attraction/adding" class="ms-3 btn btn-sm btn-danger"> + Attraction </a>
             </h2>
 
             <!-- Table for Fetch Data -->
-            <table class="table table-bordered table-striped table-hover">
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped table-hover">
                 <!-- Table Title -->
                 <thead>
                     <tr class="">
@@ -58,8 +60,7 @@
                         <!-- City Name -->
                         <td align="center">{{ $row->city_name }}</td>
 
-                        <!-- Like Count -->
-                        <td align="center">{{ number_format($row->like_count,0) }}</td>
+                        
 
                         <!-- Edit Button -->
                         <td align="center">
@@ -93,11 +94,14 @@
             </table>
         </div>
     </div>
+</div>
+
     
     <!-- Links -->
     <div>
         {{ $attrs->links() }}
     </div>
+
 
 
     @endsection

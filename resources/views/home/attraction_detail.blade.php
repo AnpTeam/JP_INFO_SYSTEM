@@ -12,7 +12,7 @@
                     style="background-image: url('{{ asset('storage/' . $attr_thumbnail) }}');background-color: rgba(0, 0, 0, 0.14); background-blend-mode: darken; background-size: auto;">
                     <div class="hero-overlay"></div>
                     <div class="container hero-content">
-                        <h1 class="fw-bold">{{ \Illuminate\Support\Str::limit($attr_name, 100) }}</h1>
+                        <h1 class="fw-bold ">{{ \Illuminate\Support\Str::limit($attr_name, 100) }}</h1>
                     </div>
                 </div>
             </div>
@@ -21,10 +21,10 @@
     </div>
 
     <div class="container my-5">
-        <div class="row align-items-start px-6">
+        <div class="row align-items-start px-6 ">
             <!-- ข้อความ -->
-            <div class="" style="padding-right: 100px;"> <!-- ขยับออกทางซ้าย -->
-                <h3>Overview</h3>
+            <div class="text-justify">
+                <h1>Overview</h1>
                 <p>
                     {{ \Illuminate\Support\Str::limit($attr_desc, 1000) }}
                 </p>

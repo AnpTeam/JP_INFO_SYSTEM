@@ -15,7 +15,7 @@
         <div class="col-md-12">
             <!-- Title & Add Button -->
             <h2 class="fw-bold mb-3"> City Managements Table
-                <a href="/city/adding" class="ms-3 btn btn-primary btn-sm"> + City </a>
+                <a href="/city/adding" class="ms-3 btn btn-sm btn-danger"> + City </a>
             </h2>
 
             <!-- Table for Fetch Data -->

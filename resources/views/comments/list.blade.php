@@ -15,7 +15,7 @@
     <div class="row">
         <div class="col-md-12">
             <h2 class="fw-bold mb-3"> Comments Managements Table
-                <a href="/comment/adding" class="ms-3 btn btn-primary btn-sm"> + Comment </a>
+                <a href="/comment/adding" class="ms-3 btn btn-sm btn-danger"> + Comment </a>
             </h2>
 
             <table class="table table-bordered table-striped table-hover ">

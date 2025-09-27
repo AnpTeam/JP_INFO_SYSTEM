@@ -15,7 +15,7 @@
         <div class="col-md-12">
             <!-- Title -->
             <h2 class="fw-bold mb-3"> Category Managements Table
-                <a href="/category/adding" class="ms-3 btn btn-primary btn-sm"> + Category </a>
+                <a href="/category/adding" class="ms-3 btn btn-sm btn-danger"> + Category </a>
             </h2>
 
             <!-- Table -->

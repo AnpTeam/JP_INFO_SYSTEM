@@ -5,13 +5,9 @@
 @section('sidebarMenu')
 @section('content')
 
-<<<<<<< HEAD
-<h3> :: form Update Category :: </h3>
-=======
     <form action="/category/{{ $category_id }}" method="post" enctype="multipart/form-data">
         @csrf
         @method('put')
->>>>>>> fc29b5089ca7771dcd7beca57abfdf4310e2b972
 
         <!-- Title -->
         <h1 class=" fw-bold mb-4 text-dark">CATEGORY EDIT FORM </h1>
@@ -40,7 +36,7 @@
         </div>
 
     </form>
-    </div>
+
 
 
 @endsection

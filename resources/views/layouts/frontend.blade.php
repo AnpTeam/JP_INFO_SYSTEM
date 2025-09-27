@@ -131,6 +131,22 @@
         .search-bar button {
             border-radius: 50px;
         }
+
+        .text-justify {
+        text-align: justify;
+        text-justify: inter-word;   /* จัดแบบคง spacing คำ */
+        hyphens: auto;              /* ตัดคำอัตโนมัติ */
+        line-height: 1.6;           /* เพิ่มระยะบรรทัดให้อ่านง่าย */
+        word-spacing: 0.05em;       /* ลดช่องว่างเกิน */
+        }
+        .table img {
+        max-width: 100%;
+        height: auto;
+        max-height: 80px; /* กำหนดความสูงสูงสุด */
+        object-fit: cover; /* ตัดส่วนเกินออกถ้าสัดส่วนไม่พอดี */
+        }
+
+
     </style>
     @yield('css_before')
 </head>
@@ -149,14 +165,14 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="text-light nav-link active" href="/">Home</a></li>
+                    <li class="nav-item"><a class="text-light nav-link active" href="/"><i class="fa-solid fa-house me-2"></i> Home</a></li>
                     <li class="nav-item"><a class="text-light nav-link"
-                            href="{{ route('search', ['%']) }}">Attractions</a></li>
+                            href="{{ route('search', ['%']) }}"><i class="fa-solid fa-location-dot me-2 "></i> Attractions</a></li>
                     <li class="nav-item"><a class="text-light nav-link"
-                            href="{{ route('searchRegion', ['%']) }}">Regions</a></li>
-                    <li class="nav-item"><a class="text-light nav-link" href="/user">Back Office</a></li>
+                            href="{{ route('searchRegion', ['%']) }}"><i class="fa-solid fa-flag me-2"></i>Regions</a></li>
+                    <li class="nav-item"><a class="text-light nav-link" href="/user"><i class="fa-solid fa-gears me-2"></i>Back Office</a></li>
 
-                    <li class="nav-item ms-5">
+                    <li class="nav-item ms-3">
                         @if (Auth::check())
                             <a href="#" class="nav-link text-light"
                                 onclick="event.preventDefault(); document.getElementById('logout-form').submit();">

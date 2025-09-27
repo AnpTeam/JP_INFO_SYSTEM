@@ -15,7 +15,7 @@
         <div class="col-md-12">
             <!-- Title -->
             <h2 class="fw-bold mb-3"> Region Managements Table
-                <a href="/region/adding" class="ms-3 btn btn-primary btn-sm"> + Region </a>
+                <a href="/region/adding" class="ms-3 btn btn-sm btn-danger"> + Region </a>
             </h2>
 
             <!-- Table -->
