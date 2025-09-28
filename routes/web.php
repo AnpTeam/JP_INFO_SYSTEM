@@ -115,10 +115,7 @@ Route::post('/register', [AuthController::class, 'register']);
 // protected routes (ต้อง login ก่อนถึงจะเข้าได้)
 Route::middleware('auth:web')->group(function () {
     Route::post('/addComment', [HomeController::class, 'addComment'])->name('addComment');
+    Route::post('/attraction/{id}/like', [AttractionController::class, 'like'])->name('attraction.like');
 });
-
-Route::post('/attraction/{id}/like', [AttractionController::class, 'like'])
-    ->middleware('auth')
-    ->name('attraction.like');
 
 /* AUTHENTICATION PAGE END */

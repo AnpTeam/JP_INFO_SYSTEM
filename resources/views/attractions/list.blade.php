@@ -30,7 +30,6 @@
                         <th width="45%">Attractions Name & Detail </th>
                         <th width="15%" class="text-center">Category</th>
                         <th width="15%" class="text-center">City</th>
-                        <th width="15%" class="text-center">Like Count</th>
                         <th width="5%" class="text-center">edit</th>
                         <th width="5%" class="text-center">delete</th>
                     </tr>

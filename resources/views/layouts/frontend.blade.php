@@ -177,16 +177,29 @@
 
                     <li class="nav-item ms-3">
                         @if (Auth::check())
-                            <a href="#" class="nav-link text-light"
-                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                <i class="fa-solid fa-right-to-bracket me-2"></i>
-                                Log out
-                            </a>
+
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                                    <i class="fa-solid fa-user"></i>
+                                    {{session('user_name')}}
+                                </a>
+                                <ul class="dropdown-menu p-2 ms-1">
+                                    <li>
+                                        <a href="#" class="nav-link text-danger"
+                                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                            <i class="fa-solid fa-right-to-bracket me-2"></i>
+                                            Log out
+                                        </a>
 
 
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display:none;">
-                                @csrf
-                            </form>
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display:none;">
+                                            @csrf
+                                        </form>
+                                    </li>
+                                </ul>
+                            </li>
+
+
 
 
                         @else

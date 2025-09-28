@@ -65,7 +65,7 @@ class DashboardController extends Controller
 
             //Filtered Table & Columns
             $joinTables = ['tbl_attraction', 'tbl_city', 'tbl_region', 'tbl_category'];
-            $joinColoumns = ['Count By Visit'];
+            $joinColoumns = ['count by visit','like_count'];
 
             //Get All columns
             foreach ($joinTables as $joinCol) {
@@ -152,8 +152,6 @@ class DashboardController extends Controller
                 
             }
 
-            //Filtered Table ? Columns
-            $joinColoumns[] = 'comment_like';
 
             // Further filter out foreign key and date columns and information columns
             foreach ($joinColoumns as $col) {
@@ -252,11 +250,15 @@ class DashboardController extends Controller
             ]);
             // Handle "like_count" separately
         } elseif (strcasecmp($column, 'like_count') === 0) {
-            $results = DB::table('tbl_attraction')
-                ->select('attr_name as attraction', DB::raw("$column as SumAttr"))
-                ->groupBy('attr_name', $column)  // you MUST group by both
-                ->orderByDesc('SumAttr')
-                ->get();
+$results = DB::table('attraction_user_likes')
+    ->join('tbl_attraction', 'attraction_user_likes.attraction_id', '=', 'tbl_attraction.attr_id')
+    ->select('tbl_attraction.attr_name as attraction', DB::raw('COUNT(*) as SumAttr'))
+    ->groupBy('tbl_attraction.attr_name')  // ✅ Only group by the real column
+    ->orderByDesc('SumAttr')
+    ->get();
+
+
+
 
 
 
