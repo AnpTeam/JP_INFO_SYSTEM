@@ -190,8 +190,8 @@ class UserController extends Controller
 
         /* Validation Rule */
         $validator = Validator::make($request->all(), [
-            'user_name' => 'required|min:3|unique:tbl_user',
-            'user_email' => 'required|email|unique:tbl_user',
+            'user_name' => 'required|min:3|unique:tbl_user,user_name,' . $user_id . ',user_id',
+            'user_email' => 'required|email|unique:tbl_user,user_email,' . $user_id . ',user_id',
             'user_phone' => 'required|min:10|max:10',
         ], $messages);
 
