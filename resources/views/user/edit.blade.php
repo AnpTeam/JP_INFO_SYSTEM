@@ -61,6 +61,22 @@
                 @endif
             </div>
         </div>
+        <!-- Role Dropdown -->
+        <div class="form-group row mb-3">
+            <label class="col-sm-2">Role </label>
+            <div class="col-sm-6">
+                @csrf
+                <select id="role" name="user_role" class="form-select">
+                    <option value="user">User</option>
+                    <option value="admin">Admin</option>
+                </select>
+                @if(isset($errors))
+                    @if($errors->has('admin_role'))
+                        <div class="text-danger"> {{ $errors->first('admin_role') }}</div>
+                    @endif
+                @endif
+            </div>
+        </div>
 
         <!-- Update & Cancel  -->
         <div class="form-group row mb-2">
@@ -71,6 +87,8 @@
             </div>
         </div>
     </form>
+
+    
     <!-- Form END  -->
 
 @endsection
