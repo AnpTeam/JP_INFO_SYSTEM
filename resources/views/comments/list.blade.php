@@ -24,8 +24,7 @@
                         <th width="5%" class="text-center">No.</th>
                         <th width="15%" class="text-center">Attraction</th>
                         <th width="15%" class="text-center">Username</th>
-                        <th width="40%">Comment Detail </th>
-                        <th width="15%" class="text-center">Like Count</th>
+                        <th width="55%">Comment Detail </th>
                         <th width="5%" class="text-center">edit</th>
                         <th width="5%" class="text-center">delete</th>
                     </tr>
@@ -40,7 +39,6 @@
                         <td align="left">
                             {{ Str::limit($row->comment_desc, 120, '...') }}
                         </td>
-                        <td align="right">{{ number_format($row->like_count,0) }}</td>
                         <td align="center">
                             <a href="/comment/{{ $row->comment_id }}" class="btn btn-warning btn-sm">edit</a>
                         </td>
