@@ -291,7 +291,7 @@ $results = DB::table('attraction_user_likes')
                 ->join('tbl_comment', 'tbl_user.user_id', '=', 'tbl_comment.user_id')
                 ->select(
                     'tbl_user.user_name as user_name',
-                    DB::raw('MAX(tbl_comment.like_count) as max_likes')
+                    DB::raw('tbl_comment.like_count as max_likes')
                 )
                 ->groupBy('tbl_user.user_name')
                 ->orderByDesc('max_likes')

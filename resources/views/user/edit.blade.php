@@ -1,8 +1,5 @@
 @extends('home')
 
-@section('css_before')
-@endsection
-
 @section('header')
 @endsection
 
@@ -10,6 +7,8 @@
 @endsection
 
 @section('content')
+
+    @include('sweetalert::alert')
 
     <!-- Form START  -->
     <form action="/user/{{ $user_id }}" method="post">
@@ -88,7 +87,7 @@
         </div>
     </form>
 
-    
+
     <!-- Form END  -->
 
 @endsection

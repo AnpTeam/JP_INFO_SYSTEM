@@ -1,76 +1,72 @@
 @extends('home')
-@section('js_before')
-@include('sweetalert::alert')
+
 @section('header')
+@endsection
+
 @section('sidebarMenu')
+@endsection
+
 @section('content')
+
+    @include('sweetalert::alert')
 
     <form action="/region/{{ $region_id }}" method="post" enctype="multipart/form-data">
         @csrf
         @method('put')
 
         <!-- Title -->
-        <h1 class=" fw-bold mb-4 text-dark">REGION ADD FORM </h1>
+        <h1 class="fw-bold mb-4 text-dark">REGION UPDATE FORM</h1>
 
         <!-- Form Name -->
         <div class="form-group row mb-2">
-            <label class="col-sm-2"> Region Name </label>
+            <label class="col-sm-2">Region Name</label>
             <div class="col-sm-7">
-                <input type="text" class="form-control" name="region_name" required placeholder="Region Name " minlength="3"
-                    value="{{ $region_name }}">
-                @if(isset($errors))
-                    @if($errors->has('region_name'))
-                        <div class="text-danger"> {{ $errors->first('region_name') }}</div>
-                    @endif
-                @endif
+                <input type="text" class="form-control" name="region_name" required placeholder="Region Name"
+                       minlength="3" value="{{ $region_name }}">
+                @error('region_name')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
             </div>
         </div>
 
         <!-- Form Description -->
         <div class="form-group row mb-2">
-            <label class="col-sm-2"> Region Description </label>
+            <label class="col-sm-2">Region Description</label>
             <div class="col-sm-7">
                 <textarea name="region_desc" class="form-control" rows="4" required
-                    placeholder="Region Description ">{{ $region_desc }}</textarea>
-                @if(isset($errors))
-                    @if($errors->has('region_desc'))
-                        <div class="text-danger"> {{ $errors->first('region_desc') }}</div>
-                    @endif
-                @endif
+                          placeholder="Region Description">{{ $region_desc }}</textarea>
+                @error('region_desc')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
             </div>
         </div>
 
         <!-- Form Picture -->
         <div class="form-group row mb-3">
-            <label class="col-sm-2"> Pic </label>
+            <label class="col-sm-2">Pic</label>
             <div class="col-sm-6">
-                old img <br>
-                <img src="{{ asset('storage/' . $region_thumbnail) }}" width="200px"> <br>
-                choose new image <br>
-                <input type="file" name="region_thumbnail" placeholder="region_thumbnail" accept="image/*">
-                @if(isset($errors))
-                    @if($errors->has('region_thumbnail'))
-                        <div class="text-danger"> {{ $errors->first('region_thumbnail') }}</div>
-                    @endif
-                @endif
+                <p>Old image:</p>
+                <img src="{{ asset('storage/' . $region_thumbnail) }}" width="200px" class="mb-2">
+                <p>Choose new image:</p>
+                <input type="file" name="region_thumbnail" accept="image/*">
+                @error('region_thumbnail')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
             </div>
         </div>
 
+        <!-- Buttons -->
         <div class="form-group row mb-2">
-            <label class="col-sm-2"> </label>
+            <label class="col-sm-2"></label>
             <div class="col-sm-5">
                 <input type="hidden" name="oldImg" value="{{ $region_thumbnail }}">
-                <button type="submit" class="btn btn-primary"> Update </button>
-                <a href="/region" class="btn btn-danger">cancel</a>
+                <button type="submit" class="btn btn-primary">Update</button>
+                <a href="/region" class="btn btn-danger">Cancel</a>
             </div>
         </div>
 
     </form>
-    </div>
-
-
 @endsection
-
 
 @section('footer')
 @endsection

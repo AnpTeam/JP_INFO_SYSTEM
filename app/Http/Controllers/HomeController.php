@@ -3,8 +3,9 @@ namespace App\Http\Controllers;
 
 use App\Models\AttractionModel;           //รับค่าจากฟอร์ม
 use App\Models\CityModel;                 //form validation
-use App\Models\RegionModel;               //sweet alert
+use App\Models\CategoryModel;            
 use App\Models\CommentModel;
+use App\Models\RegionModel;               
 use Illuminate\Http\Request;              //สำหรับเก็บไฟล์ภาพ
 use Illuminate\Pagination\Paginator;      //แบ่งหน้า
 use Illuminate\Support\Facades\DB;       //model
@@ -59,12 +60,12 @@ class HomeController extends Controller
          *  @SQL Syntax
          * ==========================
          *  SELECT *
-         *  FROM tbl_region
+         *  FROM tbl_category
          *  =============================
-         *  @Fetch Variable : $regions
+         *  @Fetch Variable : $category
          *  @Tools : DB, Paginator
          */
-        $regions = RegionModel::orderBy('region_id', 'desc')->get(); //order by & pagination
+        $category = CategoryModel::orderBy('category_id', 'desc')->get(); //order by & pagination
 
         /** DATABASE QUERY
          *  @SQL Syntax
@@ -77,7 +78,7 @@ class HomeController extends Controller
          */
         $citys = CityModel::orderBy('city_id', 'desc')->get(); //order by & pagination
 
-        return view('home.attraction_index', compact('attrs', 'citys', 'regions', 'topThree'));
+        return view('home.attraction_index', compact('attrs', 'citys', 'category', 'topThree'));
     }
 
     public function searchAttraction(Request $request)
@@ -90,7 +91,7 @@ class HomeController extends Controller
         Paginator::useBootstrap(); // ใช้ Bootstrap pagination
 
         $keyword = $request->keyword;
-        $region = $request->region;
+        $category = $request->category;
         $city = $request->city;
 
         /** DATABASE QUERY
@@ -110,15 +111,15 @@ class HomeController extends Controller
          */
         $query = AttractionModel::query()
             ->join('tbl_city', 'tbl_attraction.city_id', '=', 'tbl_city.city_id')
-            ->join('tbl_region', 'tbl_city.region_id', '=', 'tbl_region.region_id');
+            ->join('tbl_category', 'tbl_attraction.category_id', '=', 'tbl_category.category_id');
 
         // Apply filters conditionally
         if (!empty($keyword)) {
             $query->where('attr_name', 'like', "%{$keyword}%");
         }
 
-        if (!empty($region)) {
-            $query->where('tbl_region.region_id', $region);
+        if (!empty($category)) {
+            $query->where('tbl_category.category_id', $category);
         }
 
         if (!empty($city)) {
@@ -131,7 +132,7 @@ class HomeController extends Controller
         // Count total results
         $count = $attrs->Total(); // use total(), not count() when paginating
 
-        return view('home.attraction_search', compact('attrs', 'keyword', 'count', 'city', 'region'));
+        return view('home.attraction_search', compact('attrs', 'keyword', 'count', 'city', 'category'));
 
     } // searchattrs
 

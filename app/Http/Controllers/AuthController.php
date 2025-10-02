@@ -147,7 +147,7 @@ class AuthController extends Controller
 
         /* Validation Checking */
         if ($validator->fails()) {
-            return redirect('user/adding')
+            return redirect('/register')
                 ->withErrors($validator)
                 ->withInput();
         }
@@ -164,8 +164,8 @@ class AuthController extends Controller
                 'user_role' => strip_tags('user'),
             ]);
             /* แสดง Alert ก่อน return */
-            Alert::success('เพิ่มข้อมูลสำเร็จ');
-            return redirect('/user');
+            Alert::success('You are registered successfully', 'Please login to continue.');
+            return redirect('/login');
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500); //สำหรับ debug
             /* DEBUG ZONE */

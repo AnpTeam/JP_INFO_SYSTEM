@@ -507,14 +507,12 @@ class AttractionController extends Controller
             $status = 'liked';
         }
 
-        // 🔁 เช็กว่าเป็น AJAX หรือไม่
         if (request()->ajax()) {
             return response()->json([
                 'status' => $status,
                 'likes_count' => $attr->likes()->count()
             ]);
         } else {
-            // 🔁 กดปุ่มแบบธรรมดา → redirect กลับหน้าเดิม
             return back();
         }
     }

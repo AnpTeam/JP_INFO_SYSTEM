@@ -1,8 +1,5 @@
 @extends('home')
 
-@section('css_before')
-@endsection
-
 @section('header')
 @endsection
 
@@ -10,6 +7,8 @@
 @endsection
 
 @section('content')
+
+    @include('sweetalert::alert')
 
     <!-- Load external libraries -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -110,7 +109,7 @@
                         </div>
                     </div>
                 </div>
-           
+
                 <!-- Total Region -->
                 <div class="col-6 col-md-2">
                     <!-- Custom Style Card -->
@@ -161,145 +160,145 @@
                     </div>
                 </div>
 
-                
 
 
-            <!-- JavaScript for Chart Rendering -->
-            <script>
-                let visitsChart;
-                // declare visitsChart globally so it can be reused
 
-                // Function to create a chart with given type, labels, and data
-                function createChart(type, labels, data) {
-                    // สร้างสีสวยๆ แบบ Gradient หรือใช้สีสดใสจากพาเลตต์
-                    const backgroundColors = [
-                        '#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0',
-                        '#9966FF', '#FF9F40', '#E7E9ED', '#76B041',
-                        '#FF6F91', '#845EC2', '#00C9A7', '#FF9671'
-                    ];
+                <!-- JavaScript for Chart Rendering -->
+                <script>
+                    let visitsChart;
+                    // declare visitsChart globally so it can be reused
 
-                    return new Chart(ctx, {
-                        type: type,
-                        data: {
-                            labels: labels,
-                            datasets: [{
-                                label: labels,
-                                data: data,
-                                backgroundColor: backgroundColors.slice(0, data.length),
-                                borderColor: '#fff',
-                                borderWidth: 2,
-                                hoverOffset: 30,     // เวลาชี้ slice จะเด้งออกมานิดๆ สวยดี
-                                borderRadius: 8,      // มุมกราฟโค้งมน
-                                fill: 'origin'
-                            }]
-                        },
-                        options: {
-                            responsive: true,
-                            plugins: {
-                                legend: {
-                                    position: 'right',
-                                    labels: {
-                                        padding: 20,
-                                        font: {
-                                            size: 14,
-                                            weight: 'bold'
+                    // Function to create a chart with given type, labels, and data
+                    function createChart(type, labels, data) {
+                        // สร้างสีสวยๆ แบบ Gradient หรือใช้สีสดใสจากพาเลตต์
+                        const backgroundColors = [
+                            '#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0',
+                            '#9966FF', '#FF9F40', '#E7E9ED', '#76B041',
+                            '#FF6F91', '#845EC2', '#00C9A7', '#FF9671'
+                        ];
+
+                        return new Chart(ctx, {
+                            type: type,
+                            data: {
+                                labels: labels,
+                                datasets: [{
+                                    label: labels,
+                                    data: data,
+                                    backgroundColor: backgroundColors.slice(0, data.length),
+                                    borderColor: '#fff',
+                                    borderWidth: 2,
+                                    hoverOffset: 30,     // เวลาชี้ slice จะเด้งออกมานิดๆ สวยดี
+                                    borderRadius: 8,      // มุมกราฟโค้งมน
+                                    fill: 'origin'
+                                }]
+                            },
+                            options: {
+                                responsive: true,
+                                plugins: {
+                                    legend: {
+                                        position: 'right',
+                                        labels: {
+                                            padding: 20,
+                                            font: {
+                                                size: 14,
+                                                weight: 'bold'
+                                            }
                                         }
+                                    },
+                                    tooltip: {
+                                        enabled: true,
+                                        backgroundColor: 'rgba(0,0,0,0.8)',
+                                        titleFont: { size: 16, weight: 'bold' },
+                                        bodyFont: { size: 14 }
                                     }
-                                },
-                                tooltip: {
-                                    enabled: true,
-                                    backgroundColor: 'rgba(0,0,0,0.8)',
-                                    titleFont: { size: 16, weight: 'bold' },
-                                    bodyFont: { size: 14 }
                                 }
                             }
-                        }
-                    });
-                }
+                        });
+                    }
 
 
-                // Initialize the chart with default data from Blade
-                const ctx = document.getElementById('visitsChart').getContext('2d');
-                visitsChart = createChart(
-                    'line',
-                    {!! json_encode($label) !!},   // labels from DB
-                    {!! json_encode($dataViewCounter) !!} // data from DB
-                );
+                    // Initialize the chart with default data from Blade
+                    const ctx = document.getElementById('visitsChart').getContext('2d');
+                    visitsChart = createChart(
+                        'line',
+                        {!! json_encode($label) !!},   // labels from DB
+                        {!! json_encode($dataViewCounter) !!} // data from DB
+                    );
 
-                $('#select_column').on('change', function () {
-                    let selectedColumn = $(this).val();
+                    $('#select_column').on('change', function () {
+                        let selectedColumn = $(this).val();
 
-                    // Always fetch data dynamically via AJAX
-                    $.ajax({
-                        url: '/dashboard/chart-data',
-                        type: 'GET',
-                        data: { column: selectedColumn },
-                        dataType: 'json',
-                        cache: false,
-                        success: function (response) {
-                            if (response.labels && response.data) {
-                                visitsChart.data.labels = response.labels;
-                                visitsChart.data.datasets[0].data = response.data;
-                                visitsChart.data.datasets[0].label = selectedColumn;
-                                visitsChart.update();
-                            } else {
-                                alert('Invalid response format');
+                        // Always fetch data dynamically via AJAX
+                        $.ajax({
+                            url: '/dashboard/chart-data',
+                            type: 'GET',
+                            data: { column: selectedColumn },
+                            dataType: 'json',
+                            cache: false,
+                            success: function (response) {
+                                if (response.labels && response.data) {
+                                    visitsChart.data.labels = response.labels;
+                                    visitsChart.data.datasets[0].data = response.data;
+                                    visitsChart.data.datasets[0].label = selectedColumn;
+                                    visitsChart.update();
+                                } else {
+                                    alert('Invalid response format');
+                                }
+                            },
+                            error: function (xhr, status, error) {
+                                console.error("AJAX Error:", error);
+                                alert('Error fetching chart data');
                             }
-                        },
-                        error: function (xhr, status, error) {
-                            console.error("AJAX Error:", error);
-                            alert('Error fetching chart data');
+                        });
+                    });
+
+                    // Event: when user changes chart type
+                    $('#select_bartype').on('change', function () {
+                        let selectedBarType = $(this).val();
+
+                        // save current data and options
+                        const currentData = JSON.parse(JSON.stringify(visitsChart.data));
+                        const currentOptions = JSON.parse(JSON.stringify(visitsChart.options));
+
+                        // destroy and recreate chart
+                        visitsChart.destroy();
+                        visitsChart = createChart(selectedBarType, currentData.labels, currentData.datasets[0].data);
+                    });
+                </script>
+                <!-- End JavaScript -->
+
+                <!-- JavaScript for number flex card -->
+                <script>
+                    document.addEventListener('DOMContentLoaded', function () {
+                        const cardValueEl = document.getElementById('cardValue');
+                        if (!cardValueEl) {
+                            console.error("Element with id 'cardValue' not found.");
+                            return;
+                        }
+                        const valueStr = cardValueEl.textContent.replace(/,/g, '').trim();
+                        const value = parseInt(valueStr, 10);
+
+                        if (value >= 1000000) {
+                            cardValueEl.classList.add('large');
+                            cardEl.classList.add('large');
+
+                        } else if (value >= 1000) {
+                            cardValueEl.classList.add('medium');
+                        } else {
+                            cardValueEl.classList.add('small');
                         }
                     });
-                });
 
-                // Event: when user changes chart type
-                $('#select_bartype').on('change', function () {
-                    let selectedBarType = $(this).val();
-
-                    // save current data and options
-                    const currentData = JSON.parse(JSON.stringify(visitsChart.data));
-                    const currentOptions = JSON.parse(JSON.stringify(visitsChart.options));
-
-                    // destroy and recreate chart
-                    visitsChart.destroy();
-                    visitsChart = createChart(selectedBarType, currentData.labels, currentData.datasets[0].data);
-                });
-            </script>
-            <!-- End JavaScript -->
-
-            <!-- JavaScript for number flex card -->
-            <script>
-                document.addEventListener('DOMContentLoaded', function () {
-                    const cardValueEl = document.getElementById('cardValue');
-                    if (!cardValueEl) {
-                        console.error("Element with id 'cardValue' not found.");
-                        return;
-                    }
-                    const valueStr = cardValueEl.textContent.replace(/,/g, '').trim();
-                    const value = parseInt(valueStr, 10);
-
-                    if (value >= 1000000) {
-                        cardValueEl.classList.add('large');
-                        cardEl.classList.add('large');
-
-                    } else if (value >= 1000) {
-                        cardValueEl.classList.add('medium');
-                    } else {
-                        cardValueEl.classList.add('small');
-                    }
-                });
-
-            </script>
-            <!-- End JavaScript -->
+                </script>
+                <!-- End JavaScript -->
 
 @endsection
 
-        @section('footer')
-        @endsection
+            @section('footer')
+            @endsection
 
-        @section('js_before')
-        @endsection
+            @section('js_before')
+            @endsection
 
-        @section('js_before')
-        @endsection
+            @section('js_before')
+            @endsection

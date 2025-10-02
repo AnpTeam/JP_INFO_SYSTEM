@@ -1,11 +1,14 @@
 @extends('home')
-@section('css_before')
-@endsection
+
 @section('header')
 @endsection
+
 @section('sidebarMenu')
 @endsection
+
 @section('content')
+
+    @include('sweetalert::alert')
 
     <!-- Form START -->
     <form action="/region/" method="post" enctype="multipart/form-data">

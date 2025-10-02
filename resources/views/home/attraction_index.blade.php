@@ -31,11 +31,11 @@
                                     @endforeach
                                 </select>
 
-                                <select class="form-select me-2" name="region">
-                                    <option value="" class="disabled"> -- Select Region -- </option>
+                                <select class="form-select me-2" name="category">
+                                    <option value="" class="disabled"> -- Select Category -- </option>
 
-                                    @foreach($regions as $region)
-                                    <option value="{{$region->region_id}}">{{$region->region_name}}</option>
+                                    @foreach($category as $cat)
+                                    <option value="{{$cat->category_id}}">{{$cat->category_name}}</option>
                                     @endforeach
                                 </select>
                                  <button id="Submit" class="btn btn-primary px-4">Search</button>
