@@ -33,7 +33,7 @@
                 <tbody>
                     @foreach($region as $row)
                     <tr>
-                        <td align="center">{{ $row->region_id }}</td>
+                        <td align="center">{{ $loop->iteration }}</td>
                         <td>
 
                             <img src="{{ asset('storage/' . $row->region_thumbnail) }}" width="100">
